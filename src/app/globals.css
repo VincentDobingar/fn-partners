@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+:root {
+  --color-gold: #b08d2d;
+  --color-gold-light: #d9b95c;
+  --color-gold-deep: #8a6e1f;
+  --color-navy: #0b1533;
+  --color-navy-light: #16234b;
+  --color-ink: #15161a;
+  --color-ink-soft: #3a3c42;
+  --color-muted: #6b6d74;
+  --color-paper: #faf9f6;
+  --color-raised: #ffffff;
+  --color-line: #e4e1d8;
+  --color-line-soft: #eeece5;
+}
+
+@theme inline {
+  --color-gold: var(--color-gold);
+  --color-gold-light: var(--color-gold-light);
+  --color-gold-deep: var(--color-gold-deep);
+  --color-navy: var(--color-navy);
+  --color-navy-light: var(--color-navy-light);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-muted: var(--color-muted);
+  --color-paper: var(--color-paper);
+  --color-raised: var(--color-raised);
+  --color-line: var(--color-line);
+  --color-line-soft: var(--color-line-soft);
+
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "IBM Plex Mono", monospace;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+}
+
+.prose-body p {
+  margin-top: 1em;
+  line-height: 1.75;
+}
+
+::selection {
+  background: var(--color-gold-light);
+  color: var(--color-navy);
+}
