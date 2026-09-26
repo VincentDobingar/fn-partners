@@ -28,8 +28,8 @@ export async function generateMetadata({
   const loc = isLocale(locale) ? locale : defaultLocale;
   const title =
     loc === "fr"
-      ? "NF & PARTNERS — Cabinet d’avocats et de conseil juridique au Tchad"
-      : "NF & PARTNERS — Law Firm and Legal Advisory in Chad";
+      ? "FN & PARTNERS — Cabinet d’avocats et de conseil juridique au Tchad"
+      : "FN & PARTNERS — Law Firm and Legal Advisory in Chad";
   const description =
     loc === "fr"
       ? "Cabinet d’avocats panafricain basé à N’Djamena, Tchad. Droit des affaires, droit OHADA, contentieux, droits humains et conseil aux entreprises et investisseurs."
@@ -37,7 +37,7 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(siteConfig.url),
-    title: { default: title, template: `%s — NF & PARTNERS` },
+    title: { default: title, template: `%s — FN & PARTNERS` },
     description,
     alternates: {
       canonical: `/${loc}`,
@@ -47,7 +47,7 @@ export async function generateMetadata({
       title,
       description,
       url: `${siteConfig.url}/${loc}`,
-      siteName: "NF & PARTNERS",
+      siteName: "FN & PARTNERS",
       locale: loc === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },

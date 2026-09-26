@@ -11,12 +11,15 @@ export function CookieConsent({ locale, dict }: { locale: Locale; dict: Dictiona
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    // Reading consent from localStorage requires the client; no value exists during SSR.
+    let shouldShow = true;
     try {
-      const stored = window.localStorage.getItem(STORAGE_KEY);
-      if (!stored) setVisible(true);
+      shouldShow = !window.localStorage.getItem(STORAGE_KEY);
     } catch {
-      setVisible(true);
+      shouldShow = true;
     }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setVisible(shouldShow);
   }, []);
 
   function decide(value: "accepted" | "declined") {

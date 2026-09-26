@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FN & PARTNERS — Site institutionnel (Lot 1)
 
-## Getting Started
+Site vitrine bilingue (FR/EN) du cabinet FN & PARTNERS, développé avec Next.js (App Router), TypeScript et Tailwind CSS.
 
-First, run the development server:
+## Contenu du Lot 1
+
+- Pages institutionnelles : Accueil, Le Cabinet, Notre fondateur, Notre équipe, Implantation panafricaine, Contact.
+- 21 pages Domaines d'expertise + Secteurs d'intervention, optimisées SEO.
+- Blog / Publications, Ressources & guides pratiques, FAQ juridique.
+- Prise de rendez-vous en ligne (formulaire + confirmation par e-mail).
+- Boutons Appel / E-mail / WhatsApp / Itinéraire.
+- Bannière de consentement aux cookies (RGPD).
+- SEO technique : sitemap.xml, robots.txt, données structurées (LegalService, Person, FAQPage, Article, BreadcrumbList), Open Graph.
+- Site bilingue français / anglais (architecture prête pour l'ajout de l'arabe).
+
+Les pages "Soumettre une demande" et "Suivre mon dossier" (espace client sécurisé) sont prévues aux Lots 2 et 3 : elles affichent une page "à venir" en attendant leur développement.
+
+## Prérequis
+
+- Node.js 20 ou supérieur
+- npm
+
+## Installation
+
+```bash
+npm install
+```
+
+## Développement local
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est accessible sur [http://localhost:3000](http://localhost:3000) (redirection automatique vers `/fr`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Variables d'environnement
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copier `.env.example` en `.env.local` et renseigner les identifiants SMTP pour l'envoi réel des e-mails (formulaires de contact et de rendez-vous). Sans configuration SMTP, les messages sont journalisés dans la console du serveur — pratique en développement, à configurer avant la mise en production.
 
-## Learn More
+```bash
+cp .env.example .env.local
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Build de production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement, nom de domaine, hébergement et messagerie
 
-## Deploy on Vercel
+Le nom de domaine, l'hébergement et les 10 adresses e-mail professionnelles (offre incluse pour la première année, cf. proposition commerciale) doivent être configurés avant la mise en ligne définitive :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Déployer l'application (Vercel, ou tout hébergeur compatible Node.js/Next.js).
+2. Pointer le nom de domaine `nf-partners.com` (ou domaine retenu) vers l'hébergement.
+3. Configurer les enregistrements DNS MX pour les 10 adresses e-mail professionnelles.
+4. Renseigner les variables d'environnement SMTP en production pour l'envoi des e-mails du site (formulaires de rendez-vous et de contact).
+5. Mettre à jour `src/lib/data/firm.ts` (`siteConfig.url`) avec l'URL définitive du site.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Structure du projet
+
+```
+src/
+  app/
+    [locale]/          Pages du site (fr / en)
+    api/                Routes API (formulaires)
+    sitemap.ts          Sitemap XML généré dynamiquement
+    robots.ts           robots.txt généré dynamiquement
+  components/
+    layout/             Header, Footer, sélecteur de langue, bannière cookies
+    ui/                 Composants d'interface réutilisables
+    forms/              Formulaires (rendez-vous, contact)
+    seo/                Composant d'injection des données structurées
+  lib/
+    data/               Contenus du site (cabinet, expertise, équipe, publications...)
+    i18n/               Dictionnaire de traduction et configuration des langues
+    seo/                Générateurs de données structurées (JSON-LD)
+    mailer.ts           Envoi d'e-mails (SMTP via nodemailer)
+```
+
+## Contenus à valider par le cabinet
+
+Conformément au cahier des charges, aucune information non confirmée (biographies détaillées, distinctions, résultats judiciaires, membres de l'équipe, etc.) n'a été inventée. Ces éléments sont clairement identifiés dans le code par la mention « À compléter » et doivent être validés par le cabinet avant la mise en ligne définitive. Les articles du blog sont des contenus de démonstration à remplacer par les publications réelles du cabinet.

@@ -74,7 +74,8 @@ export function articleSchema({
 }: {
   title: string;
   description: string;
-  datePublished: string;
+  /** Renseigné uniquement lorsque la date de publication est confirmée. */
+  datePublished?: string;
   url: string;
 }) {
   return {
@@ -82,7 +83,7 @@ export function articleSchema({
     "@type": "Article",
     headline: title,
     description,
-    datePublished,
+    ...(datePublished ? { datePublished } : {}),
     url,
     author: {
       "@type": "Organization",

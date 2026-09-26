@@ -1,6 +1,6 @@
 export const firm = {
-  name: "NF & PARTNERS",
-  legalName: "NF & PARTNERS",
+  name: "FN & PARTNERS",
+  legalName: "FN & PARTNERS",
   tagline: {
     fr: "Cabinet d’avocats et de conseil juridique",
     en: "Law firm and legal advisory",
@@ -15,8 +15,8 @@ export const firm = {
   },
   address: {
     line1: {
-      fr: "Quartier Sabangali, rue de la Corniche",
-      en: "Sabangali district, Rue de la Corniche",
+      fr: "Quartier Sabangali, Avenue de la Corniche",
+      en: "Sabangali district, Avenue de la Corniche",
     },
     line2: {
       fr: "En face du Bureau de la Coopération suisse au Tchad",
@@ -28,6 +28,11 @@ export const firm = {
       en: "Chad",
     },
     poBox: "BP 5080 N’Djamena, Tchad",
+  },
+  // Coordonnées GPS du cabinet (12°05'46.4"N 15°03'14.0"E)
+  geo: {
+    lat: 12.096208,
+    lng: 15.0538811,
   },
   phones: ["+235 66 11 43 86", "+235 91 21 49 86", "+235 66 93 39 66"],
   email: "mefredericnane@yahoo.fr",
@@ -43,7 +48,7 @@ export const firm = {
 
 export const siteConfig = {
   url: "https://www.nf-partners.com",
-  name: "NF & PARTNERS",
+  name: "FN & PARTNERS",
   defaultLocale: "fr",
   locales: ["fr", "en"] as const,
 };

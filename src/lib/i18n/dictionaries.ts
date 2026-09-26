@@ -4,9 +4,12 @@ export const dictionaries = {
   fr: {
     nav: {
       home: "Accueil",
+      about: "À propos",
       firm: "Le Cabinet",
       founder: "Notre fondateur",
       team: "Notre équipe",
+      gallery: "Galerie",
+      news: "Actualités",
       expertise: "Domaines d’expertise",
       sectors: "Secteurs d’intervention",
       locations: "Implantation panafricaine",
@@ -27,6 +30,7 @@ export const dictionaries = {
       learnMore: "En savoir plus",
       seeAllExpertise: "Voir tous les domaines d’expertise",
       seeAllPublications: "Voir toutes les publications",
+      seeAllNews: "Voir toutes les actualités",
       readMore: "Lire la suite",
       send: "Envoyer",
       call: "Appeler",
@@ -68,9 +72,12 @@ export const dictionaries = {
   en: {
     nav: {
       home: "Home",
+      about: "About",
       firm: "The Firm",
       founder: "Our Founder",
       team: "Our Team",
+      gallery: "Gallery",
+      news: "News",
       expertise: "Areas of Expertise",
       sectors: "Sectors We Serve",
       locations: "Pan-African Presence",
@@ -91,6 +98,7 @@ export const dictionaries = {
       learnMore: "Learn More",
       seeAllExpertise: "See All Areas of Expertise",
       seeAllPublications: "See All Publications",
+      seeAllNews: "See All News",
       readMore: "Read More",
       send: "Send",
       call: "Call",
@@ -129,7 +137,7 @@ export const dictionaries = {
     requestDisclaimer:
       "Submitting this form does not automatically create an attorney-client relationship and does not guarantee that the file will be accepted.",
   },
-} as const;
+};
 
 export function getDictionary(locale: Locale) {
   return dictionaries[locale];

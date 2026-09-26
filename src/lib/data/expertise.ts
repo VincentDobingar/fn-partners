@@ -24,11 +24,13 @@ export const expertiseDomains: ExpertiseDomain[] = [
       summary:
         "Conseil et représentation des entreprises dans l’ensemble de leurs opérations juridiques courantes et stratégiques.",
       intro:
-        "NF & PARTNERS accompagne les entreprises et leurs dirigeants dans la sécurisation juridique de leurs activités au Tchad et dans l’espace régional, de la structuration initiale aux opérations les plus complexes.",
+        "FN & PARTNERS accompagne les entreprises et leurs dirigeants dans la sécurisation juridique de leurs activités au Tchad et dans l’espace régional, de la structuration initiale aux opérations les plus complexes.",
       issues: [
-        "Structuration juridique de l’activité et gouvernance interne",
+        "Structuration juridique de l’activité, rédaction des statuts et formalités de constitution",
+        "Secrétariat juridique annuel et opérations sur capital",
+        "Cession d’entreprise, lettre d’intention, protocole de cession et pacte d’actionnaires",
+        "Accompagnement du Conseil d’administration dans l’organisation de ses assises",
         "Négociation et rédaction d’accords commerciaux",
-        "Prévention et gestion des risques juridiques liés à l’exploitation",
         "Relations avec les partenaires, actionnaires et administrations",
       ],
       clients: [
@@ -54,11 +56,13 @@ export const expertiseDomains: ExpertiseDomain[] = [
       summary:
         "Advising and representing companies across their day-to-day and strategic legal operations.",
       intro:
-        "NF & PARTNERS supports companies and their executives in securing their activities in Chad and across the region, from initial structuring to the most complex transactions.",
+        "FN & PARTNERS supports companies and their executives in securing their activities in Chad and across the region, from initial structuring to the most complex transactions.",
       issues: [
-        "Legal structuring of the business and internal governance",
+        "Legal structuring of the business, drafting of articles of association and incorporation formalities",
+        "Annual corporate secretarial services and capital transactions",
+        "Business transfers, letters of intent, transfer protocols and shareholders’ agreements",
+        "Supporting the Board of Directors in organising its meetings",
         "Negotiation and drafting of commercial agreements",
-        "Prevention and management of legal risks related to operations",
         "Relations with partners, shareholders and administrations",
       ],
       clients: ["SMEs and large companies", "International groups established in Chad", "Executives and shareholders"],
@@ -72,6 +76,54 @@ export const expertiseDomains: ExpertiseDomain[] = [
         {
           q: "Do you offer ongoing legal support?",
           a: "Yes, one-off or ongoing support can be arranged depending on the company’s needs.",
+        },
+      ],
+    },
+  },
+  {
+    slug: "droit-civil-et-accompagnement-des-ong",
+    keywords: ["avocat ONG Tchad", "conseil juridique association Tchad", "droit civil Tchad"],
+    fr: {
+      title: "Droit civil et accompagnement des ONG",
+      summary: "Conseil juridique permanent des organisations non gouvernementales, de la gouvernance à la protection de leurs actifs.",
+      intro:
+        "Le cabinet conseille les ONG sur l’ensemble des questions juridiques liées à leurs activités et assure une veille réglementaire permanente.",
+      issues: [
+        "Rédaction, révision et sécurisation des statuts et règlements intérieurs",
+        "Conventions de partenariats et contrats conclus par l’ONG",
+        "Accompagnement dans les démarches administratives et conformité de la gouvernance",
+        "Assistance des organes dirigeants dans la prise de décision",
+        "Protection des actifs, des droits de propriété et des données personnelles de l’ONG",
+      ],
+      clients: ["ONG nationales et internationales", "Organisations de la société civile", "Fondations et associations"],
+      approach:
+        "Une veille réglementaire permanente et une disponibilité constante pour accompagner les ONG dans la sécurisation juridique de leur gouvernance et de leurs activités.",
+      faq: [
+        {
+          q: "Le cabinet conseille-t-il les ONG internationales ?",
+          a: "Oui, le cabinet accompagne aussi bien les ONG nationales qu’internationales présentes au Tchad.",
+        },
+      ],
+    },
+    en: {
+      title: "Civil Law & NGO Support",
+      summary: "Ongoing legal advice for non-governmental organisations, from governance to asset protection.",
+      intro:
+        "The firm advises NGOs on all legal matters relating to their activities and provides continuous regulatory monitoring.",
+      issues: [
+        "Drafting, reviewing and securing articles of association and internal regulations",
+        "Partnership agreements and contracts entered into by the NGO",
+        "Support with administrative procedures and governance compliance",
+        "Assisting governing bodies with decision-making",
+        "Protecting the NGO’s assets, property rights and personal data",
+      ],
+      clients: ["National and international NGOs", "Civil society organisations", "Foundations and associations"],
+      approach:
+        "Continuous regulatory monitoring and constant availability to support NGOs in securing their governance and activities.",
+      faq: [
+        {
+          q: "Does the firm advise international NGOs?",
+          a: "Yes, the firm supports both national and international NGOs operating in Chad.",
         },
       ],
     },
@@ -131,7 +183,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Droit des sociétés et gouvernance",
       summary: "Accompagnement des organes sociaux et sécurisation des décisions de gouvernance.",
       intro:
-        "NF & PARTNERS conseille les sociétés et leurs organes dirigeants sur l’ensemble des questions de gouvernance, de la vie sociale courante aux décisions stratégiques.",
+        "FN & PARTNERS conseille les sociétés et leurs organes dirigeants sur l’ensemble des questions de gouvernance, de la vie sociale courante aux décisions stratégiques.",
       issues: [
         "Rédaction et mise à jour des statuts et pactes d’associés",
         "Organisation des assemblées générales et des organes de direction",
@@ -152,7 +204,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Corporate Law & Governance",
       summary: "Supporting corporate bodies and securing governance decisions.",
       intro:
-        "NF & PARTNERS advises companies and their governing bodies on all governance matters, from routine corporate life to strategic decisions.",
+        "FN & PARTNERS advises companies and their governing bodies on all governance matters, from routine corporate life to strategic decisions.",
       issues: [
         "Drafting and updating articles of association and shareholders’ agreements",
         "Organisation of general meetings and management bodies",
@@ -222,7 +274,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Fusions-acquisitions et investissements",
       summary: "Sécurisation juridique des opérations de croissance externe et des investissements.",
       intro:
-        "NF & PARTNERS conseille investisseurs, acquéreurs et cédants dans la structuration, la négociation et la sécurisation juridique de leurs opérations.",
+        "FN & PARTNERS conseille investisseurs, acquéreurs et cédants dans la structuration, la négociation et la sécurisation juridique de leurs opérations.",
       issues: [
         "Audit juridique préalable (due diligence)",
         "Structuration et négociation des opérations",
@@ -243,7 +295,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Mergers, Acquisitions & Investments",
       summary: "Legal security for external growth transactions and investments.",
       intro:
-        "NF & PARTNERS advises investors, buyers and sellers on the structuring, negotiation and legal security of their transactions.",
+        "FN & PARTNERS advises investors, buyers and sellers on the structuring, negotiation and legal security of their transactions.",
       issues: [
         "Legal due diligence",
         "Structuring and negotiation of transactions",
@@ -311,7 +363,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Contentieux et arbitrage",
       summary: "Représentation devant les juridictions et dans les procédures d’arbitrage.",
       intro:
-        "NF & PARTNERS représente ses clients devant les juridictions tchadiennes et dans les procédures d’arbitrage, avec une stratégie contentieuse adaptée à chaque dossier.",
+        "FN & PARTNERS représente ses clients devant les juridictions tchadiennes et dans les procédures d’arbitrage, avec une stratégie contentieuse adaptée à chaque dossier.",
       issues: [
         "Contentieux commercial et civil",
         "Procédures d’arbitrage institutionnel et ad hoc",
@@ -332,7 +384,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Litigation & Arbitration",
       summary: "Representation before the courts and in arbitration proceedings.",
       intro:
-        "NF & PARTNERS represents clients before Chadian courts and in arbitration proceedings, with a litigation strategy tailored to each case.",
+        "FN & PARTNERS represents clients before Chadian courts and in arbitration proceedings, with a litigation strategy tailored to each case.",
       issues: [
         "Commercial and civil litigation",
         "Institutional and ad hoc arbitration proceedings",
@@ -445,12 +497,13 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Droit fiscal",
       summary: "Conseil fiscal et défense des contribuables face à l’administration.",
       intro:
-        "NF & PARTNERS conseille les entreprises et les particuliers sur leurs obligations fiscales et les assiste en cas de contrôle ou de contentieux avec l’administration fiscale.",
+        "FN & PARTNERS conseille les entreprises et les particuliers sur leurs obligations fiscales et les assiste en cas de contrôle ou de contentieux avec l’administration fiscale.",
       issues: [
-        "Optimisation et sécurisation fiscale des opérations",
-        "Assistance lors des contrôles fiscaux",
-        "Contentieux fiscal",
-        "Fiscalité des investissements et des groupes",
+        "Analyse fiscale des contrats et des conventions",
+        "Rédaction d’actes en matière fiscale",
+        "Analyse et commentaires des textes fiscaux",
+        "Assistance lors des contrôles fiscaux et devant l’administration fiscale",
+        "Assistance et défense devant les organes à caractère judiciaire",
       ],
       clients: ["Entreprises", "Investisseurs", "Particuliers"],
       approach: "Un conseil fiscal toujours articulé avec la réalité économique et les objectifs à long terme du client.",
@@ -465,12 +518,13 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Tax Law",
       summary: "Tax advice and defence of taxpayers before the authorities.",
       intro:
-        "NF & PARTNERS advises companies and individuals on their tax obligations and assists them in the event of a tax audit or dispute with the tax authorities.",
+        "FN & PARTNERS advises companies and individuals on their tax obligations and assists them in the event of a tax audit or dispute with the tax authorities.",
       issues: [
-        "Tax optimisation and risk management for transactions",
-        "Assistance during tax audits",
-        "Tax litigation",
-        "Taxation of investments and corporate groups",
+        "Tax analysis of contracts and agreements",
+        "Drafting of tax-related deeds",
+        "Analysis and commentary on tax legislation",
+        "Assistance during tax audits and before the tax administration",
+        "Assistance and defence before judicial bodies",
       ],
       clients: ["Companies", "Investors", "Individuals"],
       approach: "Tax advice consistently aligned with the client’s economic reality and long-term objectives.",
@@ -491,13 +545,14 @@ export const expertiseDomains: ExpertiseDomain[] = [
       intro:
         "Le cabinet accompagne employeurs et salariés sur l’ensemble des questions liées au contrat de travail, aux relations collectives et à la sécurité sociale.",
       issues: [
-        "Rédaction de contrats de travail et règlements intérieurs",
-        "Procédures disciplinaires et licenciements",
-        "Relations avec les représentants du personnel",
-        "Contentieux prud’homal et sécurité sociale",
+        "Rédaction de contrats de travail, de règlements intérieurs, de conventions d’entreprise et de codes éthiques",
+        "Missions de recrutement et portage salarial",
+        "Assistance lors de la rupture contractuelle : mesures disciplinaires, convocation à l’entretien, licenciement pour motif économique",
+        "Régularisation des liens contractuels avec les institutions administratives (CNPS, ONAPE, etc.)",
+        "Procédures amiables et contentieuses devant l’Inspection du Travail, la Sécurité Sociale et les juridictions",
       ],
       clients: ["Employeurs", "Salariés", "Organisations professionnelles"],
-      approach: "Une gestion des relations de travail qui concilie sécurité juridique et climat social apaisé.",
+      approach: "Une expertise très intégrée du droit social, privilégiant une approche concrète et souvent en amont des sujets sociaux, en interaction constante avec l’équipe dirigeante des clients.",
       faq: [
         {
           q: "Le cabinet intervient-il en cas de licenciement contesté ?",
@@ -511,13 +566,14 @@ export const expertiseDomains: ExpertiseDomain[] = [
       intro:
         "The firm supports employers and employees on all matters relating to employment contracts, collective relations and social security.",
       issues: [
-        "Drafting employment contracts and internal regulations",
-        "Disciplinary procedures and dismissals",
-        "Relations with staff representatives",
-        "Labour tribunal and social security litigation",
+        "Drafting employment contracts, internal regulations, company agreements and codes of ethics",
+        "Recruitment assignments and payroll outsourcing (portage salarial)",
+        "Assistance with contract termination: disciplinary measures, hearing notices, dismissal for economic reasons",
+        "Regularising contractual relationships with administrative bodies (CNPS, ONAPE, etc.)",
+        "Amicable and contentious proceedings before the Labour Inspectorate, Social Security and the courts",
       ],
       clients: ["Employers", "Employees", "Professional organisations"],
-      approach: "Managing employment relations in a way that reconciles legal certainty with a stable social climate.",
+      approach: "A deeply integrated approach to employment law, favouring practical solutions and early engagement on social matters, in constant interaction with clients’ management teams.",
       faq: [
         {
           q: "Does the firm handle disputed dismissals?",
@@ -533,7 +589,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Droit immobilier, foncier et construction",
       summary: "Sécurisation des opérations immobilières, foncières et de construction.",
       intro:
-        "NF & PARTNERS conseille particuliers, entreprises et institutions dans leurs opérations immobilières, foncières et de construction.",
+        "FN & PARTNERS conseille particuliers, entreprises et institutions dans leurs opérations immobilières, foncières et de construction.",
       issues: [
         "Acquisition, cession et sécurisation foncière",
         "Baux commerciaux et d’habitation",
@@ -553,7 +609,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Real Estate, Land & Construction Law",
       summary: "Securing real estate, land and construction transactions.",
       intro:
-        "NF & PARTNERS advises individuals, companies and institutions on their real estate, land and construction transactions.",
+        "FN & PARTNERS advises individuals, companies and institutions on their real estate, land and construction transactions.",
       issues: [
         "Acquisition, transfer and land title security",
         "Commercial and residential leases",
@@ -621,7 +677,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Télécommunications et droit du numérique",
       summary: "Accompagnement juridique des acteurs des télécommunications et du numérique.",
       intro:
-        "NF & PARTNERS conseille les opérateurs et entreprises du secteur numérique sur les aspects réglementaires, contractuels et technologiques de leurs activités.",
+        "FN & PARTNERS conseille les opérateurs et entreprises du secteur numérique sur les aspects réglementaires, contractuels et technologiques de leurs activités.",
       issues: [
         "Régime des autorisations et licences télécoms",
         "Contrats technologiques et de services numériques",
@@ -641,7 +697,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Telecommunications & Digital Law",
       summary: "Legal support for telecommunications and digital sector players.",
       intro:
-        "NF & PARTNERS advises operators and digital-sector companies on the regulatory, contractual and technological aspects of their activities.",
+        "FN & PARTNERS advises operators and digital-sector companies on the regulatory, contractual and technological aspects of their activities.",
       issues: [
         "Telecom authorisation and licensing regime",
         "Technology and digital services contracts",
@@ -709,7 +765,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Propriété intellectuelle",
       summary: "Protection et valorisation des actifs de propriété intellectuelle.",
       intro:
-        "NF & PARTNERS conseille ses clients sur la protection, la défense et la valorisation de leurs marques, créations et innovations.",
+        "FN & PARTNERS conseille ses clients sur la protection, la défense et la valorisation de leurs marques, créations et innovations.",
       issues: [
         "Dépôt et protection de marques",
         "Contrats de licence et de cession de droits",
@@ -729,7 +785,7 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Intellectual Property",
       summary: "Protecting and enhancing the value of intellectual property assets.",
       intro:
-        "NF & PARTNERS advises clients on protecting, defending and enhancing the value of their trademarks, creations and innovations.",
+        "FN & PARTNERS advises clients on protecting, defending and enhancing the value of their trademarks, creations and innovations.",
       issues: [
         "Trademark filing and protection",
         "Licensing and assignment agreements",
@@ -797,14 +853,15 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Droit pénal des affaires",
       summary: "Défense et conseil des entreprises et de leurs dirigeants face au risque pénal.",
       intro:
-        "NF & PARTNERS assiste les entreprises et leurs dirigeants confrontés à des questions de droit pénal des affaires, en conseil comme en défense.",
+        "FN & PARTNERS assiste les entreprises et leurs dirigeants confrontés à des questions de droit pénal des affaires, en conseil comme en défense.",
       issues: [
-        "Prévention du risque pénal dans l’activité économique",
-        "Assistance lors des enquêtes et procédures pénales",
-        "Défense des dirigeants et des personnes morales",
+        "Prévention du risque pénal dans l’activité économique et mise en place de mécanismes de conformité",
+        "Assistance lors des enquêtes, auditions et procédures pénales",
+        "Défense des dirigeants et des personnes morales, y compris des ONG",
+        "Dépôt de plaintes et constitution de partie civile pour la réparation des préjudices subis",
         "Infractions économiques et financières",
       ],
-      clients: ["Entreprises", "Dirigeants", "Cadres et responsables opérationnels"],
+      clients: ["Entreprises", "Dirigeants", "Cadres et responsables opérationnels", "ONG et leurs dirigeants ou employés"],
       approach: "Une défense rigoureuse, fondée sur une analyse approfondie du dossier et des enjeux économiques associés.",
       faq: [
         {
@@ -817,14 +874,15 @@ export const expertiseDomains: ExpertiseDomain[] = [
       title: "Business Criminal Law",
       summary: "Defending and advising companies and executives facing criminal law risk.",
       intro:
-        "NF & PARTNERS assists companies and executives confronted with business criminal law issues, both in advisory and defence matters.",
+        "FN & PARTNERS assists companies and executives confronted with business criminal law issues, both in advisory and defence matters.",
       issues: [
-        "Preventing criminal law risk in economic activity",
-        "Assistance during investigations and criminal proceedings",
-        "Defence of executives and legal entities",
+        "Preventing criminal law risk in economic activity and implementing compliance mechanisms",
+        "Assistance during investigations, hearings and criminal proceedings",
+        "Defence of executives and legal entities, including NGOs",
+        "Filing complaints and bringing civil party actions to obtain redress for harm suffered",
         "Economic and financial offences",
       ],
-      clients: ["Companies", "Executives", "Managers and operational staff"],
+      clients: ["Companies", "Executives", "Managers and operational staff", "NGOs and their executives or staff"],
       approach: "A rigorous defence built on a thorough analysis of the file and the related economic stakes.",
       faq: [
         {
