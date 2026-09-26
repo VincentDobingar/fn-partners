@@ -42,7 +42,7 @@ export const firm = {
     en: "A pan-African law firm recognised for its expertise, integrity, closeness to clients and command of national, regional and international legal matters.",
   },
   social: {
-    whatsapp: "23566114386",
+    whatsapp: "23591214986",
   },
 } as const;
 
