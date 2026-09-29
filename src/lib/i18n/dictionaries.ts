@@ -53,9 +53,8 @@ export const dictionaries = {
     },
     cookies: {
       message:
-        "Nous utilisons des cookies pour améliorer votre expérience et mesurer l’audience du site. Vous pouvez accepter ou refuser les cookies non essentiels.",
-      accept: "Accepter",
-      decline: "Refuser",
+        "Ce site utilise uniquement des éléments techniques nécessaires à son fonctionnement. Aucun cookie de mesure d’audience ou publicitaire n’est déposé à ce jour.",
+      dismiss: "J’ai compris",
       more: "En savoir plus",
     },
     common: {
@@ -122,9 +121,8 @@ export const dictionaries = {
     },
     cookies: {
       message:
-        "We use cookies to improve your experience and measure site audience. You may accept or decline non-essential cookies.",
-      accept: "Accept",
-      decline: "Decline",
+        "This site only uses technical elements required for it to function. No audience-measurement or advertising cookies are set at this time.",
+      dismiss: "Got it",
       more: "Learn more",
     },
     common: {

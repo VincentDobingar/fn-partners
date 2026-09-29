@@ -22,9 +22,9 @@ export function CookieConsent({ locale, dict }: { locale: Locale; dict: Dictiona
     setVisible(shouldShow);
   }, []);
 
-  function decide(value: "accepted" | "declined") {
+  function dismiss() {
     try {
-      window.localStorage.setItem(STORAGE_KEY, value);
+      window.localStorage.setItem(STORAGE_KEY, "seen");
     } catch {
       // ignore storage errors (private browsing, blocked storage, etc.)
     }
@@ -45,17 +45,10 @@ export function CookieConsent({ locale, dict }: { locale: Locale; dict: Dictiona
         <div className="flex gap-3 shrink-0">
           <button
             type="button"
-            onClick={() => decide("declined")}
-            className="px-4 py-2 text-sm border border-white/30 rounded-sm hover:border-white"
-          >
-            {dict.cookies.decline}
-          </button>
-          <button
-            type="button"
-            onClick={() => decide("accepted")}
+            onClick={dismiss}
             className="px-4 py-2 text-sm bg-gold text-navy rounded-sm hover:bg-gold-light"
           >
-            {dict.cookies.accept}
+            {dict.cookies.dismiss}
           </button>
         </div>
       </div>

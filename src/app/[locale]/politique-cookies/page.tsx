@@ -39,14 +39,16 @@ export default async function CookiesPage({ params }: { params: Promise<{ locale
         <p>A cookie is a small file stored on your device when you visit a website, used to remember information about your visit.</p>
 
         <h2>Cookies used on this site</h2>
-        <ul>
-          <li>Essential cookies, required for the site to function correctly</li>
-          <li>Audience measurement cookies, used only with your consent</li>
-        </ul>
+        <p>
+          This site does not currently set any audience-measurement or advertising cookies. The only element stored is a preference saved locally in your browser (not a cookie, and never sent to our servers) to remember that you have seen the cookie banner.
+        </p>
+        <p>
+          Should the firm introduce audience-measurement tools in the future, this page will be updated accordingly and your consent will be requested beforehand via the banner.
+        </p>
 
         <h2>Managing your preferences</h2>
         <p>
-          When you first visit the site, a banner lets you accept or decline non-essential cookies. You can also manage cookies directly in your browser settings at any time.
+          You can dismiss the banner shown on your first visit. You can also manage cookies directly in your browser settings at any time.
         </p>
       </LegalPage>
     );
@@ -58,14 +60,16 @@ export default async function CookiesPage({ params }: { params: Promise<{ locale
       <p>Un cookie est un petit fichier déposé sur votre appareil lors de la visite d’un site internet, permettant de mémoriser des informations relatives à votre visite.</p>
 
       <h2>Cookies utilisés sur ce site</h2>
-      <ul>
-        <li>Cookies essentiels, nécessaires au bon fonctionnement du site</li>
-        <li>Cookies de mesure d’audience, utilisés uniquement avec votre consentement</li>
-      </ul>
+      <p>
+        Ce site ne dépose actuellement aucun cookie de mesure d’audience ou publicitaire. Le seul élément conservé est une préférence enregistrée localement dans votre navigateur (et non un cookie, jamais transmise à nos serveurs) permettant de mémoriser que vous avez pris connaissance de la bannière relative aux cookies.
+      </p>
+      <p>
+        Si le cabinet venait à mettre en place des outils de mesure d’audience, cette page serait mise à jour en conséquence et votre consentement serait demandé au préalable via la bannière.
+      </p>
 
       <h2>Gestion de vos préférences</h2>
       <p>
-        Lors de votre première visite, une bannière vous permet d’accepter ou de refuser les cookies non essentiels. Vous pouvez également gérer les cookies directement depuis les paramètres de votre navigateur, à tout moment.
+        Vous pouvez fermer la bannière affichée lors de votre première visite. Vous pouvez également gérer les cookies directement depuis les paramètres de votre navigateur, à tout moment.
       </p>
     </LegalPage>
   );
