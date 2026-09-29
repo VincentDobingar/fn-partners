@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -15,7 +15,7 @@ const copy = {
     reachTitle: "Notre portée régionale",
     reachText:
       "Au-delà du Tchad, le cabinet intervient dans l’espace OHADA et accompagne ses clients devant la Cour africaine des droits de l’homme et des peuples, à Arusha. D’autres bureaux ou partenariats régionaux seront mentionnés ici lorsqu’ils seront officiellement confirmés par le cabinet.",
-    mapNote: "Carte interactive — à intégrer (Google Maps ou OpenStreetMap).",
+    mapTitle: "Localisation du cabinet FN & PARTNERS sur la carte",
   },
   en: {
     title: "Location & Pan-African Reach",
@@ -26,7 +26,7 @@ const copy = {
     reachTitle: "Our Regional Reach",
     reachText:
       "Beyond Chad, the firm operates across the OHADA area and supports clients before the African Court on Human and Peoples’ Rights, in Arusha. Any additional regional offices or partnerships will be listed here once officially confirmed by the firm.",
-    mapNote: "Interactive map — to be integrated (Google Maps or OpenStreetMap).",
+    mapTitle: "Location of FN & PARTNERS on the map",
   },
 } as const;
 
@@ -47,26 +47,36 @@ export default async function LocationsPage({ params }: { params: Promise<{ loca
   const t = copy[locale];
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <div className="mt-12 grid md:grid-cols-2 gap-10">
-        <div>
-          <h2 className="font-serif text-xl text-navy">{t.addressTitle}</h2>
-          <address className="mt-3 not-italic text-ink-soft leading-relaxed">
-            {firm.address.line1[locale]}<br />
-            {firm.address.line2[locale]}<br />
-            {firm.address.city}, {firm.address.country[locale]}<br />
-            {firm.address.poBox}
-          </address>
-          <div className="mt-6 aspect-video rounded-sm border border-dashed border-line flex items-center justify-center text-xs text-muted text-center px-4">
-            {t.mapNote}
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+        <div className="grid md:grid-cols-2 gap-10">
+          <div>
+            <h2 className="font-serif text-xl text-navy">{t.addressTitle}</h2>
+            <address className="mt-3 not-italic text-ink-soft leading-relaxed">
+              {firm.address.line1[locale]}<br />
+              {firm.address.line2[locale]}<br />
+              {firm.address.city}, {firm.address.country[locale]}<br />
+              {firm.address.poBox}
+            </address>
+            <div className="mt-6 overflow-hidden rounded-sm border border-line shadow-sm">
+              <iframe
+                title={t.mapTitle}
+                src={`https://maps.google.com/maps?q=${firm.geo.lat},${firm.geo.lng}&z=15&hl=${locale}&output=embed`}
+                className="block w-full aspect-video"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+          </div>
+          <div>
+            <h2 className="font-serif text-xl text-navy">{t.reachTitle}</h2>
+            <p className="mt-3 text-ink-soft leading-relaxed">{t.reachText}</p>
           </div>
         </div>
-        <div>
-          <h2 className="font-serif text-xl text-navy">{t.reachTitle}</h2>
-          <p className="mt-3 text-ink-soft leading-relaxed">{t.reachText}</p>
-        </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }

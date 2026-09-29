@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { generalFaq } from "@/lib/data/faq";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { faqSchema } from "@/lib/seo/jsonld";
@@ -41,12 +41,12 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
   const items = generalFaq.map((item) => item[locale]);
 
   return (
-    <Container className="py-16 max-w-3xl">
+    <>
       <JsonLd data={faqSchema(items)} />
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <div className="mt-10">
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16 max-w-3xl">
         <FaqAccordion items={items} />
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 }

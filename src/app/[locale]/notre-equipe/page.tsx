@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { teamMembers } from "@/lib/data/team";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { Avatar } from "@/components/ui/Avatar";
 
 const copy = {
@@ -52,18 +52,22 @@ export default async function TeamPage({ params }: { params: Promise<{ locale: s
   const base = `/${locale}`;
 
   return (
-    <Container className="py-16">
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-        <Link
-          href={`${base}/galerie`}
-          className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-wider text-gold-deep hover:text-gold-light whitespace-nowrap"
-        >
-          {t.galleryCta}
-        </Link>
-      </div>
-
-      <div className="mt-14 grid md:grid-cols-5 gap-0 items-stretch rounded-sm border border-line bg-raised overflow-hidden">
+    <>
+      <PageHero
+        kicker={t.kicker}
+        title={t.title}
+        lead={t.lead}
+        actions={
+          <Link
+            href={`${base}/galerie`}
+            className="inline-flex items-center gap-2 rounded-sm border border-white/30 px-5 py-2.5 text-sm text-white hover:border-gold-light hover:text-gold-light transition-colors whitespace-nowrap"
+          >
+            {t.galleryCta}
+          </Link>
+        }
+      />
+      <Container className="py-16">
+      <div className="grid md:grid-cols-5 gap-0 items-stretch rounded-sm border border-line bg-raised overflow-hidden">
         <div className="md:col-span-2 relative min-h-[320px] bg-navy">
           {founder.image && (
             <Image
@@ -110,6 +114,7 @@ export default async function TeamPage({ params }: { params: Promise<{ locale: s
           ))}
         </div>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

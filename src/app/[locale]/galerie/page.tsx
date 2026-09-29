@@ -6,7 +6,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { firm } from "@/lib/data/firm";
 import { teamMembers } from "@/lib/data/team";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { GalleryLightbox, type GalleryImage } from "@/components/ui/GalleryLightbox";
 
 const copy = {
@@ -145,18 +145,19 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
   ];
 
   return (
-    <Container className="py-16">
-      <nav className="text-xs font-mono uppercase tracking-wider text-muted mb-6">
-        <Link href={base} className="hover:text-gold-deep">{dict.common.breadcrumbHome}</Link>
-        <span className="mx-2">/</span>
-        <Link href={`${base}/notre-equipe`} className="hover:text-gold-deep">{dict.nav.team}</Link>
-        <span className="mx-2">/</span>
-        <span className="text-ink-soft">{t.title}</span>
-      </nav>
-
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-
-      <div className="mt-14">
+    <>
+      <PageHero
+        kicker={t.kicker}
+        title={t.title}
+        lead={t.lead}
+        breadcrumbs={[
+          { label: dict.common.breadcrumbHome, href: base },
+          { label: dict.nav.team, href: `${base}/notre-equipe` },
+          { label: t.title },
+        ]}
+      />
+      <Container className="py-16">
+      <div>
         <h2 className="font-serif text-2xl text-navy">{t.founderTitle}</h2>
         <p className="mt-2 text-muted leading-relaxed max-w-2xl">{t.founderLead}</p>
         <div className="mt-8">
@@ -194,6 +195,7 @@ export default async function GalleryPage({ params }: { params: Promise<{ locale
           {t.backToTeam}
         </Link>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

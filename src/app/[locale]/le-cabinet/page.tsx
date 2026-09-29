@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 
 const copy = {
@@ -146,16 +146,19 @@ export default async function FirmPage({ params }: { params: Promise<{ locale: s
   const t = copy[locale];
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-
-      <div className="mt-8">
-        <Button href="/documents/presentation-cabinet-fn-partners.pdf" variant="secondary">
-          {t.downloadCta}
-        </Button>
-      </div>
-
-      <div className="mt-12 grid gap-10 md:grid-cols-3">
+    <>
+      <PageHero
+        kicker={t.kicker}
+        title={t.title}
+        lead={t.lead}
+        actions={
+          <Button href="/documents/presentation-cabinet-fn-partners.pdf" variant="secondary">
+            {t.downloadCta}
+          </Button>
+        }
+      />
+      <Container className="py-16">
+      <div className="grid gap-10 md:grid-cols-3">
         {t.sections.map((section) => (
           <div key={section.title}>
             <h2 className="font-serif text-xl text-navy">{section.title}</h2>
@@ -208,6 +211,7 @@ export default async function FirmPage({ params }: { params: Promise<{ locale: s
           ))}
         </ul>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

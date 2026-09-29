@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { ExpertiseCard } from "@/components/ui/ExpertiseCard";
 
 const copy = {
@@ -40,13 +40,15 @@ export default async function ExpertiseIndexPage({ params }: { params: Promise<{
   const t = copy[locale];
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {expertiseDomains.map((domain) => (
-          <ExpertiseCard key={domain.slug} domain={domain} locale={locale} />
-        ))}
-      </div>
-    </Container>
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {expertiseDomains.map((domain) => (
+            <ExpertiseCard key={domain.slug} domain={domain} locale={locale} />
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }

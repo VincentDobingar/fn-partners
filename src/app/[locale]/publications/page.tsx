@@ -6,7 +6,7 @@ import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { publications } from "@/lib/data/publications";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -42,10 +42,10 @@ export default async function PublicationsPage({ params }: { params: Promise<{ l
   const base = `/${locale}`;
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-
-      <div className="mt-8 grid md:grid-cols-3 gap-6">
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+      <div className="grid md:grid-cols-3 gap-6">
         {publications.map((pub) => (
           <Link
             key={pub.slug}
@@ -78,6 +78,7 @@ export default async function PublicationsPage({ params }: { params: Promise<{ l
           </Link>
         ))}
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

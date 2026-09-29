@@ -5,7 +5,7 @@ import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -104,10 +104,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const base = `/${locale}`;
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.heroTitle} lead={t.heroLead} />
-
-      <div className="mt-14 grid md:grid-cols-2 gap-10">
+    <>
+      <PageHero kicker={t.kicker} title={t.heroTitle} lead={t.heroLead} />
+      <Container className="py-16">
+      <div className="grid md:grid-cols-2 gap-10">
         <div className="rounded-sm border border-line bg-raised p-8">
           <h2 className="font-serif text-xl text-navy">{t.missionTitle}</h2>
           <p className="mt-3 text-ink-soft leading-relaxed">{t.missionText}</p>
@@ -160,6 +160,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           ))}
         </div>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

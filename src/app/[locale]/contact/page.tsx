@@ -3,6 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/forms/ContactForm";
 
 function PhoneIcon() {
@@ -150,15 +151,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   return (
     <>
-      <section className="border-b border-line bg-navy text-white">
-        <Container className="pt-16 pb-28 md:pt-20 md:pb-36">
-          <div className="max-w-2xl">
-            <div className="kicker text-gold-light mb-4">{t.kicker}</div>
-            <h1 className="font-serif text-4xl md:text-5xl leading-[1.1]">{t.title}</h1>
-            <p className="mt-6 text-white/70 text-lg leading-relaxed">{t.lead}</p>
-          </div>
-        </Container>
-      </section>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} bleedBottom />
 
       <Container className="pb-16 md:pb-20">
         <div className="relative z-10 -mt-16 md:-mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

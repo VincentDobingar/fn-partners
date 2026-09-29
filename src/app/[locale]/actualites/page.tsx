@@ -5,7 +5,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { newsItems } from "@/lib/data/news";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -49,10 +49,10 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
   });
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-
-      <div className="mt-10 grid md:grid-cols-2 gap-8">
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+      <div className="grid md:grid-cols-2 gap-8">
         {sortedItems.map((item) => (
           <Link
             key={item.slug}
@@ -85,6 +85,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
           </Link>
         ))}
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

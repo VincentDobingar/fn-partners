@@ -4,7 +4,7 @@ import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { resources } from "@/lib/data/resources";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -39,19 +39,24 @@ export default async function ResourcesPage({ params }: { params: Promise<{ loca
   const dict = getDictionary(locale);
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <div className="mt-4 inline-block text-xs font-mono uppercase tracking-wider text-gold-deep bg-gold-light/20 px-3 py-1 rounded-sm">
-        {dict.common.demoContent}
-      </div>
-      <div className="mt-8 grid md:grid-cols-3 gap-6">
-        {resources.map((resource) => (
-          <div key={resource.slug} className="rounded-sm border border-line p-6">
-            <h2 className="font-serif text-lg text-navy">{resource[locale].title}</h2>
-            <p className="mt-2 text-sm text-muted leading-relaxed">{resource[locale].description}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+        <div className="inline-block text-xs font-mono uppercase tracking-wider text-gold-deep bg-gold-light/20 px-3 py-1 rounded-sm">
+          {dict.common.demoContent}
+        </div>
+        <div className="mt-8 grid md:grid-cols-3 gap-6">
+          {resources.map((resource) => (
+            <div
+              key={resource.slug}
+              className="rounded-sm border border-line bg-raised p-6 shadow-sm transition-colors hover:border-gold"
+            >
+              <h2 className="font-serif text-lg text-navy">{resource[locale].title}</h2>
+              <p className="mt-2 text-sm text-muted leading-relaxed">{resource[locale].description}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }

@@ -7,6 +7,7 @@ import { getDictionary } from "@/lib/i18n/dictionaries";
 import { firm } from "@/lib/data/firm";
 import { newsItems } from "@/lib/data/news";
 import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { personSchema } from "@/lib/seo/jsonld";
 
@@ -106,20 +107,22 @@ export default async function FounderPage({ params }: { params: Promise<{ locale
   const base = `/${locale}`;
 
   return (
-    <Container className="py-16">
+    <>
       <JsonLd data={personSchema(locale)} />
-
-      <nav className="text-xs font-mono uppercase tracking-wider text-muted mb-6">
-        <Link href={base} className="hover:text-gold-deep">{dict.common.breadcrumbHome}</Link>
-        <span className="mx-2">/</span>
-        <Link href={`${base}/notre-equipe`} className="hover:text-gold-deep">{dict.nav.team}</Link>
-        <span className="mx-2">/</span>
-        <span className="text-ink-soft">{t.title}</span>
-      </nav>
-
+      <PageHero
+        kicker={t.kicker}
+        title={firm.founder.name}
+        lead={firm.founder.title[locale]}
+        breadcrumbs={[
+          { label: dict.common.breadcrumbHome, href: base },
+          { label: dict.nav.team, href: `${base}/notre-equipe` },
+          { label: t.title },
+        ]}
+      />
+      <Container className="py-16">
       <div className="grid md:grid-cols-3 gap-12">
         <div>
-          <div className="w-full max-w-xs rounded-sm border border-line overflow-hidden">
+          <div className="w-full max-w-xs rounded-sm border border-line overflow-hidden shadow-sm">
             <Image
               src="/images/frederic/frederic-fondateur.jpg"
               alt={firm.founder.name}
@@ -131,10 +134,7 @@ export default async function FounderPage({ params }: { params: Promise<{ locale
           </div>
         </div>
         <div className="md:col-span-2">
-          <div className="kicker mb-3">{t.kicker}</div>
-          <h1 className="font-serif text-3xl md:text-4xl text-navy">{firm.founder.name}</h1>
-          <p className="mt-2 text-muted">{firm.founder.title[locale]}</p>
-          <div className="mt-6 space-y-4">
+          <div className="space-y-4">
             {t.paragraphs.map((p, i) => (
               <p key={i} className="text-ink-soft leading-relaxed">{p}</p>
             ))}
@@ -230,6 +230,7 @@ export default async function FounderPage({ params }: { params: Promise<{ locale
           </Link>
         </div>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }

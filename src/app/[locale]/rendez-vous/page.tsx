@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
 
 const copy = {
@@ -39,12 +39,14 @@ export default async function AppointmentPage({ params }: { params: Promise<{ lo
   const dict = getDictionary(locale);
 
   return (
-    <Container className="py-16 max-w-2xl">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <p className="mt-4 text-sm text-muted italic">{dict.appointmentDisclaimer}</p>
-      <div className="mt-10">
-        <AppointmentForm locale={locale} />
-      </div>
-    </Container>
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16 max-w-2xl">
+        <p className="text-sm text-muted italic">{dict.appointmentDisclaimer}</p>
+        <div className="mt-8 rounded-sm border border-line bg-raised p-8 md:p-10 shadow-sm">
+          <AppointmentForm locale={locale} />
+        </div>
+      </Container>
+    </>
   );
 }

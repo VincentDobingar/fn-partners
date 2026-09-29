@@ -3,7 +3,7 @@ import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { sectors } from "@/lib/data/sectors";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { PageHero } from "@/components/ui/PageHero";
 
 const copy = {
   fr: {
@@ -37,16 +37,21 @@ export default async function SectorsPage({ params }: { params: Promise<{ locale
   const t = copy[locale];
 
   return (
-    <Container className="py-16">
-      <SectionHeading kicker={t.kicker} title={t.title} lead={t.lead} />
-      <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {sectors.map((sector) => (
-          <div key={sector.slug} className="rounded-sm border border-line p-6">
-            <h3 className="font-serif text-lg text-navy">{sector[locale].title}</h3>
-            <p className="mt-2 text-sm text-muted leading-relaxed">{sector[locale].description}</p>
-          </div>
-        ))}
-      </div>
-    </Container>
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {sectors.map((sector) => (
+            <div
+              key={sector.slug}
+              className="rounded-sm border border-line bg-raised p-6 shadow-sm transition-colors hover:border-gold"
+            >
+              <h3 className="font-serif text-lg text-navy">{sector[locale].title}</h3>
+              <p className="mt-2 text-sm text-muted leading-relaxed">{sector[locale].description}</p>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </>
   );
 }
