@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm, siteConfig } from "@/lib/data/firm";
+import { teamMembers } from "@/lib/data/team";
 import { LegalPage } from "@/components/ui/LegalPage";
+
+const publicationDirector = teamMembers.find((member) => member.name === "Elise DAGOSSE");
 
 const copy = {
   fr: {
@@ -41,12 +44,12 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
           This website is published by {firm.name}, {firm.tagline.en}, located at {firm.address.line1.en}, {firm.address.city}, {firm.address.country.en} ({firm.address.poBox}).
         </p>
         <p>Tax identification number (NIF): {firm.nif}. Business registration number (RCCM): to be completed.</p>
-        <p>Publication director: {firm.founder.name} — to be confirmed by the firm.</p>
+        <p>Publication director: {publicationDirector?.name} — {publicationDirector?.role.en}.</p>
         <p>Contact: {firm.email} — {firm.phones[0]}</p>
 
         <h2>Hosting</h2>
         <p>
-          The domain name, hosting and associated professional email addresses are provided under the terms agreed with the firm’s digital services partner. Full hosting provider details will be added here once finalised.
+          This website is hosted by O2SWITCH SARL, Chemin des Pardiaux, 63000 Clermont-Ferrand, France — www.o2switch.fr.
         </p>
 
         <h2>Intellectual property</h2>
@@ -67,12 +70,12 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
         Le présent site est édité par {firm.name}, {firm.tagline.fr}, dont le siège est situé {firm.address.line1.fr}, {firm.address.city}, {firm.address.country.fr} ({firm.address.poBox}).
       </p>
       <p>Numéro d’Identification Fiscale (NIF) : {firm.nif}. Numéro RCCM : à compléter.</p>
-      <p>Directeur de la publication : {firm.founder.name} — à confirmer par le cabinet.</p>
+      <p>Directeur de la publication : {publicationDirector?.name} — {publicationDirector?.role.fr}.</p>
       <p>Contact : {firm.email} — {firm.phones[0]}</p>
 
       <h2>Hébergement</h2>
       <p>
-        Le nom de domaine, l’hébergement et les adresses e-mail professionnelles associées sont fournis dans le cadre de l’accord conclu avec le partenaire numérique du cabinet. Les coordonnées complètes de l’hébergeur seront ajoutées ici une fois finalisées.
+        Ce site est hébergé par O2SWITCH SARL, Chemin des Pardiaux, 63000 Clermont-Ferrand, France — www.o2switch.fr.
       </p>
 
       <h2>Propriété intellectuelle</h2>

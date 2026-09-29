@@ -48,7 +48,7 @@ export const firm = {
 } as const;
 
 export const siteConfig = {
-  url: "https://www.nf-partners.com",
+  url: "https://www.fn-partners.com",
   name: "FN & PARTNERS",
   defaultLocale: "fr",
   locales: ["fr", "en"] as const,
