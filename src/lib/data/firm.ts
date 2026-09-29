@@ -35,7 +35,7 @@ export const firm = {
     lng: 15.0538811,
   },
   phones: ["+235 66 11 43 86", "+235 91 21 49 86", "+235 66 93 39 66"],
-  email: "mefredericnane@yahoo.fr",
+  email: "mefredericnane@fn-partners.com",
   nif: "9040516A",
   positioning: {
     fr: "Cabinet d’envergure panafricaine, reconnu pour son expertise, son intégrité, sa proximité avec les clients et sa maîtrise des enjeux juridiques nationaux, régionaux et internationaux.",

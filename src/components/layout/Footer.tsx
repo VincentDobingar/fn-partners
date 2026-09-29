@@ -57,7 +57,17 @@ export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
       <div className="border-t border-white/10">
         <div className="mx-auto w-full max-w-6xl px-6 py-5 text-xs text-white/50 flex flex-col md:flex-row justify-between gap-2">
-          <span>© {year} FN &amp; PARTNERS — {dict.footer.rights}</span>
+          <span>
+            © {year} FN &amp; PARTNERS — {dict.footer.rights} - {dict.footer.credit}{" "}
+            <a
+              href="https://dbs-africa.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold-light"
+            >
+              Digital Business Services Africa
+            </a>
+          </span>
           <span>NIF : {firm.nif}</span>
         </div>
       </div>

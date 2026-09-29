@@ -49,6 +49,7 @@ export const dictionaries = {
       contactTitle: "Contact",
       navTitle: "Navigation",
       rights: "Tous droits réservés.",
+      credit: "Site créé par",
     },
     cookies: {
       message:
@@ -117,6 +118,7 @@ export const dictionaries = {
       contactTitle: "Contact",
       navTitle: "Navigation",
       rights: "All rights reserved.",
+      credit: "Site created by",
     },
     cookies: {
       message:
