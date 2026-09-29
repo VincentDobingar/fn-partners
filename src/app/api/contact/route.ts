@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     .join("\n");
 
   await sendMail({
-    to: firm.email,
+    to: firm.contactEmail,
     replyTo: data.email,
     subject: `Nouveau message de contact — ${data.fullName}`,
     text,

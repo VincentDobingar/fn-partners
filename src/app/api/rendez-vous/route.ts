@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     .join("\n");
 
   await sendMail({
-    to: firm.email,
+    to: firm.contactEmail,
     replyTo: data.email,
     subject: `Nouvelle demande de rendez-vous — ${data.fullName}`,
     text: summary,
