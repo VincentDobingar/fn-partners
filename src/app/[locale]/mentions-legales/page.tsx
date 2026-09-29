@@ -43,7 +43,7 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
         <p>
           This website is published by {firm.name}, {firm.tagline.en}, located at {firm.address.line1.en}, {firm.address.city}, {firm.address.country.en} ({firm.address.poBox}).
         </p>
-        <p>Tax identification number (NIF): {firm.nif}. Business registration number (RCCM): to be completed.</p>
+        <p>Tax identification number (NIF): {firm.nif}. As a regulated legal profession, the firm is not required to register with the Trade and Personal Property Credit Register (RCCM).</p>
         <p>Publication director: {publicationDirector?.name} — {publicationDirector?.role.en}.</p>
         <p>Contact: {firm.email} — {firm.phones[0]}</p>
 
@@ -69,7 +69,7 @@ export default async function LegalNoticePage({ params }: { params: Promise<{ lo
       <p>
         Le présent site est édité par {firm.name}, {firm.tagline.fr}, dont le siège est situé {firm.address.line1.fr}, {firm.address.city}, {firm.address.country.fr} ({firm.address.poBox}).
       </p>
-      <p>Numéro d’Identification Fiscale (NIF) : {firm.nif}. Numéro RCCM : à compléter.</p>
+      <p>Numéro d’Identification Fiscale (NIF) : {firm.nif}. En tant que profession juridique réglementée, le cabinet n’est pas soumis à l’immatriculation au Registre du Commerce et du Crédit Mobilier (RCCM).</p>
       <p>Directeur de la publication : {publicationDirector?.name} — {publicationDirector?.role.fr}.</p>
       <p>Contact : {firm.email} — {firm.phones[0]}</p>
 
