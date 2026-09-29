@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import type { Locale } from "@/lib/data/firm";
 
 const labels = {
@@ -31,6 +31,10 @@ type Status = "idle" | "submitting" | "success" | "error";
 export function ContactForm({ locale }: { locale: Locale }) {
   const t = labels[locale];
   const [status, setStatus] = useState<Status>("idle");
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -42,6 +46,8 @@ export function ContactForm({ locale }: { locale: Locale }) {
       email: String(formData.get("email") ?? ""),
       phone: String(formData.get("phone") ?? ""),
       message: String(formData.get("message") ?? ""),
+      company: String(formData.get("company") ?? ""),
+      startedAt: String(startedAt.current),
     };
 
     try {
@@ -67,6 +73,13 @@ export function ContactForm({ locale }: { locale: Locale }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="absolute -left-[9999px] top-0 w-px h-px overflow-hidden" aria-hidden="true">
+        <label>
+          Ne pas remplir / Do not fill
+          <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+
       <label className="block text-sm">
         <span className="block mb-1.5 text-ink-soft">{t.fullName}</span>
         <input required name="fullName" type="text" className={inputClass} />

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { firm } from "@/lib/data/firm";
 import { sendMail } from "@/lib/mailer";
+import { looksLikeSpam } from "@/lib/security/antiSpam";
+import { getClientIp, isRateLimited } from "@/lib/security/rateLimit";
 
 const appointmentSchema = z.object({
   fullName: z.string().trim().min(2).max(200),
@@ -14,9 +16,18 @@ const appointmentSchema = z.object({
   fileReference: z.string().trim().max(100).optional().or(z.literal("")),
   description: z.string().trim().min(10).max(2000),
   consent: z.literal(true),
+  company: z.string().optional().or(z.literal("")),
+  startedAt: z.string().optional(),
 });
 
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 15 * 60 * 1000;
+
 export async function POST(request: Request) {
+  if (isRateLimited(`rendez-vous:${getClientIp(request)}`, RATE_LIMIT, RATE_WINDOW_MS)) {
+    return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
+  }
+
   const json = await request.json().catch(() => null);
   const parsed = appointmentSchema.safeParse(json);
 
@@ -25,6 +36,10 @@ export async function POST(request: Request) {
   }
 
   const data = parsed.data;
+
+  if (looksLikeSpam(data.company, data.startedAt)) {
+    return NextResponse.json({ ok: true });
+  }
 
   const summary = [
     `Nouvelle demande de rendez-vous — FN & PARTNERS`,
