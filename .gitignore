@@ -21,6 +21,9 @@
 /build
 /deploy
 
+# pièces jointes déposées en local (Lot 2 — /soumettre-une-demande)
+/var/uploads
+
 # misc
 .DS_Store
 *.pem

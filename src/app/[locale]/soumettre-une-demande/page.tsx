@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
-import { ComingSoon } from "@/components/ui/ComingSoon";
+import { Container } from "@/components/ui/Container";
+import { PageHero } from "@/components/ui/PageHero";
+import { RequestForm } from "@/components/forms/RequestForm";
 
 const copy = {
   fr: {
+    kicker: "Soumettre une demande",
     title: "Soumettre une demande",
-    metaDescription: "Le formulaire de soumission de demande en ligne de FN & PARTNERS sera bientôt disponible.",
-    lead: "Le formulaire de soumission de demande en ligne, avec vérification des conflits d’intérêts et dépôt de pièces jointes, est en cours de déploiement.",
-    note: "En attendant sa mise en ligne, vous pouvez prendre rendez-vous ou contacter directement le cabinet pour exposer votre situation.",
+    metaDescription: "Soumettez votre demande en ligne au cabinet FN & PARTNERS, en quelques étapes.",
+    lead: "Décrivez votre situation en quelques étapes. Le cabinet examine chaque demande et revient vers vous dans les meilleurs délais.",
   },
   en: {
+    kicker: "Submit a Request",
     title: "Submit a Request",
-    metaDescription: "FN & PARTNERS’ online request submission form will be available soon.",
-    lead: "The online request submission form, including conflict-of-interest checks and document upload, is currently being rolled out.",
-    note: "In the meantime, you can book an appointment or contact the firm directly to explain your situation.",
+    metaDescription: "Submit your request online to FN & PARTNERS in a few steps.",
+    lead: "Describe your situation in a few steps. The firm reviews every request and gets back to you as soon as possible.",
   },
 } as const;
 
@@ -33,5 +35,15 @@ export default async function SubmitRequestPage({ params }: { params: Promise<{ 
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const t = copy[locale];
-  return <ComingSoon locale={locale} title={t.title} lead={t.lead} note={t.note} />;
+
+  return (
+    <>
+      <PageHero kicker={t.kicker} title={t.title} lead={t.lead} />
+      <Container className="py-16 max-w-2xl">
+        <div className="relative rounded-sm border border-line bg-raised p-8 md:p-10 shadow-sm">
+          <RequestForm locale={locale} />
+        </div>
+      </Container>
+    </>
+  );
 }

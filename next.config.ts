@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
   experimental: {
     globalNotFound: true,
   },
+  // Knex référence en interne tous ses dialectes possibles (dont des paquets optionnels non
+  // installés, ex. better-sqlite3) via des require() dynamiques que le bundler tente sinon de
+  // résoudre statiquement. On l'exclut du bundling (avec son driver mysql2) au profit d'un
+  // require() Node natif à l'exécution — cf. node_modules/next/dist/docs/.../serverExternalPackages.md.
+  serverExternalPackages: ["knex", "mysql2"],
 };
 
 export default nextConfig;
