@@ -44,3 +44,65 @@ CREATE TABLE IF NOT EXISTS request_documents (
   CONSTRAINT fk_request_documents_request FOREIGN KEY (request_id)
     REFERENCES requests(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Back-office staff (MVP) : authentification interne + triage des demandes.
+-- Voir db/migrations/README.md pour le contexte (comptes clients volontairement hors périmètre).
+
+CREATE TABLE IF NOT EXISTS staff_accounts (
+  id                      BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  email                   VARCHAR(255) NOT NULL,
+  password_hash           VARCHAR(255) NOT NULL,
+  full_name               VARCHAR(200) NOT NULL,
+  role                    VARCHAR(30)  NOT NULL DEFAULT 'staff',
+  is_active               TINYINT(1)   NOT NULL DEFAULT 1,
+  failed_login_attempts   INT UNSIGNED NOT NULL DEFAULT 0,
+  locked_until            DATETIME NULL,
+  last_login_at           DATETIME NULL,
+  created_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_staff_accounts_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS sessions (
+  id            BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  subject_type  VARCHAR(20) NOT NULL,   -- 'staff' aujourd'hui, 'client' plus tard
+  subject_id    BIGINT UNSIGNED NOT NULL,
+  token_hash    CHAR(64) NOT NULL,      -- sha256 du jeton ; le jeton brut ne vit que dans le cookie
+  user_agent    VARCHAR(255) NULL,
+  ip            VARCHAR(45) NULL,
+  expires_at    DATETIME NOT NULL,
+  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_sessions_token_hash (token_hash),
+  KEY idx_sessions_subject (subject_type, subject_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS otp_codes (
+  id            BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  subject_type  VARCHAR(20) NOT NULL,
+  subject_id    BIGINT UNSIGNED NOT NULL,
+  purpose       VARCHAR(30) NOT NULL,   -- 'login_2fa' aujourd'hui
+  code_hash     CHAR(64) NOT NULL,      -- sha256 du code à 6 chiffres
+  expires_at    DATETIME NOT NULL,
+  consumed_at   DATETIME NULL,
+  attempts      INT UNSIGNED NOT NULL DEFAULT 0,
+  created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_otp_codes_subject (subject_type, subject_id, purpose)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS request_status_history (
+  id                   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  request_id           BIGINT UNSIGNED NOT NULL,
+  old_status           VARCHAR(20) NOT NULL,
+  new_status           VARCHAR(20) NOT NULL,
+  changed_by_staff_id  BIGINT UNSIGNED NOT NULL,
+  changed_at           DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_request_status_history_request_id (request_id),
+  CONSTRAINT fk_request_status_history_request FOREIGN KEY (request_id)
+    REFERENCES requests(id) ON DELETE CASCADE,
+  CONSTRAINT fk_request_status_history_staff FOREIGN KEY (changed_by_staff_id)
+    REFERENCES staff_accounts(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
