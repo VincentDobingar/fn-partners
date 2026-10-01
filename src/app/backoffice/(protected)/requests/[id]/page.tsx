@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { StatusForm } from "./StatusForm";
+import { InviteClientForm } from "./InviteClientForm";
 
 export default async function RequestDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -11,6 +12,10 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
   const db = getDb();
   const request = await db("requests").where({ id: requestId }).first();
   if (!request) notFound();
+
+  const clientAccount = request.client_account_id
+    ? await db("client_accounts").where({ id: request.client_account_id }).select("email", "activated_at").first()
+    : null;
 
   const documents = await db("request_documents").where({ request_id: requestId }).orderBy("created_at", "asc");
   const history = await db("request_status_history as h")
@@ -28,7 +33,10 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
           <div className="kicker text-gold-deep">{request.reference}</div>
           <h1 className="font-serif text-2xl text-navy">{request.full_name}</h1>
         </div>
-        <StatusForm requestId={request.id} currentStatus={request.status} />
+        <div className="flex items-start gap-4">
+          <StatusForm requestId={request.id} currentStatus={request.status} />
+          <InviteClientForm requestId={request.id} clientAccount={clientAccount ?? null} />
+        </div>
       </div>
 
       <dl className="mt-8 grid sm:grid-cols-2 gap-x-8 gap-y-4 text-sm">

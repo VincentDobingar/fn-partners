@@ -13,7 +13,7 @@ Site vitrine bilingue (FR/EN) du cabinet FN & PARTNERS, développé avec Next.js
 - SEO technique : sitemap.xml, robots.txt, données structurées (LegalService, Person, FAQPage, Article, BreadcrumbList), Open Graph.
 - Site bilingue français / anglais (architecture prête pour l'ajout de l'arabe).
 
-La page "Soumettre une demande" (Lot 2, Stage 1) est en ligne : formulaire multi-étapes avec dépôt de pièces jointes, enregistré en base MySQL — voir « Base de données (Lot 2) » ci-dessous. La page "Suivre mon dossier" (espace client sécurisé, authentification + tableau de bord) reste prévue pour les étapes suivantes du Lot 2 et affiche une page "à venir".
+La page "Soumettre une demande" (Lot 2, Stage 1) est en ligne : formulaire multi-étapes avec dépôt de pièces jointes, enregistré en base MySQL — voir « Base de données (Lot 2) » ci-dessous. Le back-office staff (authentification + triage des demandes, `/backoffice`) et l'espace client (`/client`, comptes invités depuis le back-office, authentification + tableau de bord) sont également en ligne ; la page "Suivre mon dossier" y renvoie.
 
 ## Prérequis
 

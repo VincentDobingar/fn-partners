@@ -17,27 +17,28 @@ comme outil de migration en production.
    `changed_by_staff_id`, une vraie clé étrangère vers `staff_accounts`). `sessions` et
    `otp_codes` sont génériques (`subject_type`/`subject_id`) pour être réutilisées par les
    futurs comptes clients sans nouvelle table.
+3. **Espace client** — table `client_accounts` (comptes invités depuis le back-office,
+   `password_hash` NULL tant que non activé) et colonne `requests.client_account_id`.
+   Réutilise `sessions`/`otp_codes` tel quel (`subject_type='client'`), y compris pour les
+   liens d'activation (`otp_codes.purpose='client_activation'`, token long au lieu d'un code
+   à 6 chiffres — d'où l'ajout d'un index `idx_otp_codes_code_hash` pour la recherche par
+   token seul, sans `subject_id` connu à l'avance). Premier changement touchant des tables
+   déjà peuplées : `db/schema.sql` contient le schéma final (base neuve), et
+   `db/migrations/002_client_space.sql` contient le delta `ALTER`/`CREATE` à appliquer une
+   fois sur une base de prod existante (non ré-exécutable, contrairement à `schema.sql`).
 
-Tout est regroupé dans `db/schema.sql` (instructions `CREATE TABLE IF NOT EXISTS`) — un seul
-fichier à appliquer, ré-exécutable sans erreur si des tables existent déjà.
+`db/schema.sql` regroupe le schéma complet (instructions `CREATE TABLE IF NOT EXISTS`) pour
+une base neuve — ré-exécutable sans erreur si les tables existent déjà. Une base existante
+qui a déjà appliqué les étapes précédentes doit en plus appliquer les fichiers de migration
+numérotés (`00N_*.sql`) listés ci-dessus, chacun une seule fois.
 
 ## Évolutions prévues (à ne PAS appliquer maintenant — pour mémoire uniquement)
 
-**Espace client** (comptes clients, invitation depuis le back-office, connexion + 2FA côté
-client) — hors périmètre du back-office staff MVP, objet d'une planification dédiée :
-
-```sql
-CREATE TABLE client_accounts ( ... );  -- email, password_hash (NULL tant que non activé),
-                                        -- invited_by_staff_id, invited_at, activated_at...
-
-ALTER TABLE requests
-  ADD COLUMN client_account_id BIGINT UNSIGNED NULL AFTER id,
-  ADD CONSTRAINT fk_requests_client_account FOREIGN KEY (client_account_id)
-    REFERENCES client_accounts(id) ON DELETE SET NULL;
-```
-
-**Liens de téléchargement temporaires et signés** pour les pièces jointes — utile une fois
-qu'un client (pas seulement le staff) doit pouvoir récupérer ses documents :
+**Liens de téléchargement temporaires et signés** pour les pièces jointes — l'espace client
+(étape 3 ci-dessus) réutilise la route protégée par session existante côté staff, avec une
+vérification de propriété (`request.client_account_id`), donc cette évolution reste hors
+périmètre pour l'instant. Utile seulement si un lien doit un jour être partageable sans
+connexion préalable :
 
 ```sql
 ALTER TABLE request_documents

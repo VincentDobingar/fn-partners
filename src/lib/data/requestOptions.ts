@@ -4,6 +4,14 @@ export type UrgencyLevel = (typeof URGENCY_LEVELS)[number];
 export const REQUEST_STATUSES = ["new", "in_review", "accepted", "declined", "closed"] as const;
 export type RequestStatus = (typeof REQUEST_STATUSES)[number];
 
+export const REQUEST_STATUS_LABELS: Record<RequestStatus, string> = {
+  new: "Nouvelle",
+  in_review: "En cours d’examen",
+  accepted: "Acceptée",
+  declined: "Refusée",
+  closed: "Clôturée",
+};
+
 export const urgencyLabels: Record<UrgencyLevel, { fr: string; en: string }> = {
   low: { fr: "Faible", en: "Low" },
   normal: { fr: "Normale", en: "Normal" },

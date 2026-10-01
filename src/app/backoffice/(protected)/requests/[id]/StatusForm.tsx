@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { REQUEST_STATUSES } from "@/lib/data/requestOptions";
-
-const labels: Record<string, string> = {
-  new: "Nouvelle",
-  in_review: "En cours d’examen",
-  accepted: "Acceptée",
-  declined: "Refusée",
-  closed: "Clôturée",
-};
+import { REQUEST_STATUSES, REQUEST_STATUS_LABELS } from "@/lib/data/requestOptions";
 
 export function StatusForm({ requestId, currentStatus }: { requestId: number; currentStatus: string }) {
   const router = useRouter();
@@ -38,7 +30,7 @@ export function StatusForm({ requestId, currentStatus }: { requestId: number; cu
     >
       {REQUEST_STATUSES.map((s) => (
         <option key={s} value={s}>
-          {labels[s]}
+          {REQUEST_STATUS_LABELS[s]}
         </option>
       ))}
     </select>

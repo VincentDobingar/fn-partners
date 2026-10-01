@@ -6,6 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS requests (
   id                      BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  client_account_id       BIGINT UNSIGNED NULL,                  -- lié lors de l'invitation du client (back-office)
   reference               VARCHAR(20)  NOT NULL,                 -- ex. "REQ-2026-4F3A9C", communiqué au client
   status                  VARCHAR(20)  NOT NULL DEFAULT 'new',    -- new/in_review/accepted/declined/closed (géré côté appli)
   locale                  VARCHAR(5)   NOT NULL DEFAULT 'fr',
@@ -27,7 +28,8 @@ CREATE TABLE IF NOT EXISTS requests (
   UNIQUE KEY uq_requests_reference (reference),
   KEY idx_requests_email (email),
   KEY idx_requests_status (status),
-  KEY idx_requests_created_at (created_at)
+  KEY idx_requests_created_at (created_at),
+  KEY idx_requests_client_account_id (client_account_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS request_documents (
@@ -82,14 +84,15 @@ CREATE TABLE IF NOT EXISTS otp_codes (
   id            BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   subject_type  VARCHAR(20) NOT NULL,
   subject_id    BIGINT UNSIGNED NOT NULL,
-  purpose       VARCHAR(30) NOT NULL,   -- 'login_2fa' aujourd'hui
-  code_hash     CHAR(64) NOT NULL,      -- sha256 du code à 6 chiffres
+  purpose       VARCHAR(30) NOT NULL,   -- 'login_2fa', 'client_activation', ...
+  code_hash     CHAR(64) NOT NULL,      -- sha256 du code (6 chiffres) ou du token long (activation)
   expires_at    DATETIME NOT NULL,
   consumed_at   DATETIME NULL,
   attempts      INT UNSIGNED NOT NULL DEFAULT 0,
   created_at    DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
-  KEY idx_otp_codes_subject (subject_type, subject_id, purpose)
+  KEY idx_otp_codes_subject (subject_type, subject_id, purpose),
+  KEY idx_otp_codes_code_hash (code_hash) -- lookup direct par token (lien d'activation, sujet inconnu a priori)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS request_status_history (
@@ -106,3 +109,35 @@ CREATE TABLE IF NOT EXISTS request_status_history (
   CONSTRAINT fk_request_status_history_staff FOREIGN KEY (changed_by_staff_id)
     REFERENCES staff_accounts(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Espace client : comptes clients invités depuis le back-office (voir
+-- db/migrations/README.md). `sessions` et `otp_codes` ci-dessus sont génériques depuis le
+-- départ précisément pour être réutilisées ici (subject_type='client').
+
+CREATE TABLE IF NOT EXISTS client_accounts (
+  id                      BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  email                   VARCHAR(255) NOT NULL,            -- stockée en minuscules
+  password_hash           VARCHAR(255) NULL,                -- NULL tant que le compte n'est pas activé
+  full_name               VARCHAR(200) NOT NULL,
+  is_active               TINYINT(1)   NOT NULL DEFAULT 1,
+  failed_login_attempts   INT UNSIGNED NOT NULL DEFAULT 0,
+  locked_until            DATETIME NULL,
+  last_login_at           DATETIME NULL,
+  invited_by_staff_id     BIGINT UNSIGNED NOT NULL,
+  invited_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  activated_at            DATETIME NULL,
+  created_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at              DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_client_accounts_email (email),
+  CONSTRAINT fk_client_accounts_invited_by FOREIGN KEY (invited_by_staff_id)
+    REFERENCES staff_accounts(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- client_accounts est défini après requests dans ce fichier (ordre de lecture plus clair),
+-- donc la FK requests.client_account_id -> client_accounts(id) ne peut être posée qu'ici,
+-- une fois la table cible créée. Sur une base déjà peuplée, voir
+-- db/migrations/002_client_space.sql à la place (ALTER non ré-exécutable).
+ALTER TABLE requests
+  ADD CONSTRAINT fk_requests_client_account FOREIGN KEY (client_account_id)
+    REFERENCES client_accounts(id) ON DELETE SET NULL;
