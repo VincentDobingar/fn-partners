@@ -1,17 +1,19 @@
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { firm } from "@/lib/data/firm";
 import { expertiseDomains } from "@/lib/data/expertise";
-import { publications } from "@/lib/data/publications";
+import { publishedPublications } from "@/lib/data/publications";
 import { newsItems } from "@/lib/data/news";
 import { generalFaq } from "@/lib/data/faq";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ExpertiseCard } from "@/components/ui/ExpertiseCard";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { languageAlternates, localizedHref } from "@/lib/seo/metadata";
 
 const copy = {
   fr: {
@@ -94,6 +96,17 @@ const copy = {
   },
 } as const;
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : "fr";
+  // Titre, description et Open Graph de l’accueil sont définis dans le layout.
+  return { alternates: { canonical: localizedHref(locale), languages: languageAlternates() } };
+}
+
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   const locale: Locale = isLocale(rawLocale) ? rawLocale : "fr";
@@ -109,6 +122,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       return 0;
     })
     .slice(0, 3);
+
+  const homeFaq = generalFaq.slice(0, 4).map((item) => item[locale]);
 
   return (
     <>
@@ -132,7 +147,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
           <div className="flex justify-center md:justify-end">
             <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-full bg-white border border-line flex items-center justify-center shadow-sm">
-              <Image src="/images/logo-nfp.jpeg" alt="FN & PARTNERS" width={180} height={180} className="w-3/5 h-auto" />
+              <Image src="/images/logo-nfp.jpeg" alt="FN & PARTNERS" width={180} height={180} className="w-3/5 h-auto" priority />
             </div>
           </div>
         </Container>
@@ -239,7 +254,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Container>
           <SectionHeading kicker={t.pubKicker} title={t.pubTitle} />
           <div className="mt-10 grid md:grid-cols-3 gap-6">
-            {publications.slice(0, 3).map((pub) => (
+            {publishedPublications.slice(0, 3).map((pub) => (
               <Link
                 key={pub.slug}
                 href={`${base}/publications/${pub.slug}`}
@@ -263,7 +278,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <Container className="max-w-3xl">
           <SectionHeading kicker={t.faqKicker} title={t.faqTitle} align="center" />
           <div className="mt-10">
-            <FaqAccordion items={generalFaq.slice(0, 4).map((item) => item[locale])} />
+            <FaqAccordion items={homeFaq} />
           </div>
         </Container>
       </section>

@@ -17,7 +17,7 @@ export function LegalPage({
     <>
       <PageHero kicker={kicker} title={title} lead={lead} />
       <Container className="py-16 max-w-3xl">
-        <div className="prose-body text-ink-soft [&_h2]:font-serif [&_h2]:text-xl [&_h2]:text-navy [&_h2]:mt-10 [&_h2]:mb-2 [&_h2]:first:mt-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mt-2 [&_ul]:space-y-1">
+        <div className="prose-body text-ink-soft [&_h2]:font-serif [&_h2]:text-xl [&_h2]:text-navy [&_h2]:mt-10 [&_h2]:mb-2 [&_h2]:first:mt-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mt-2 [&_ul]:space-y-1 [&_a]:text-gold-deep [&_a]:underline [&_a]:underline-offset-2 [&_code]:font-mono [&_code]:text-[0.9em]">
           {children}
         </div>
       </Container>

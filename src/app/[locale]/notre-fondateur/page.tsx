@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
@@ -32,13 +33,12 @@ const copy = {
       "Inscrit en 2022 sur la liste des Conseils Défenseurs des requérants indigents auprès de la Cour africaine de Justice et des Droits de l’Homme (Arusha, Tanzanie)",
       "Enseignant-chercheur dans plusieurs établissements d’enseignement supérieur privés",
     ],
-    experienceTitle: "Un carnet d’adresses au service des clients",
+    experienceTitle: "Une expérience au service des clients",
     experience: [
-      "Consultant en matière sociale et fiscale auprès de l’Union Européenne et de l’Ambassade d’Allemagne au Tchad",
-      "Consultant (avis juridique et démarches) du Haut-Commissariat Britannique lors de son installation effective au Tchad",
-      "Conseil juridique de la Société d’Innovation des Bâtiments (SINOBAT) S.A",
-      "Conseil de la Société Nouvelle de prestation de services (NSP) S.A",
-      "Consultant auprès du CEFOD sur la question de la diya au Tchad, ainsi que sur les problématiques de harcèlement sexuel en milieu professionnel",
+      "Consultant en matière sociale et fiscale auprès d’une institution européenne et d’une représentation diplomatique au Tchad",
+      "Consultant (avis juridique et démarches) d’une représentation diplomatique lors de son installation au Tchad",
+      "Conseil juridique de sociétés des secteurs du bâtiment et des services",
+      "Consultant auprès d’un centre de formation et de recherche sur la question de la diya au Tchad, ainsi que sur les problématiques de harcèlement sexuel en milieu professionnel",
     ],
     publicationsTitle: "Publications",
     publications: [
@@ -69,13 +69,12 @@ const copy = {
       "Listed since 2022 among Defence Counsel for indigent applicants before the African Court of Justice and Human Rights (Arusha, Tanzania)",
       "Teaching researcher at several private higher education institutions",
     ],
-    experienceTitle: "A Network Built to Serve Clients",
+    experienceTitle: "Experience Built to Serve Clients",
     experience: [
-      "Consultant on social and tax matters for the European Union and the Embassy of Germany in Chad",
-      "Consultant (legal opinions and procedures) for the British High Commission during its establishment in Chad",
-      "Legal counsel to Société d’Innovation des Bâtiments (SINOBAT) S.A",
-      "Counsel to Société Nouvelle de prestation de services (NSP) S.A",
-      "Consultant to CEFOD on the diya (blood-money) question in Chad, as well as on issues of workplace sexual harassment",
+      "Consultant on social and tax matters for a European institution and a diplomatic mission in Chad",
+      "Consultant (legal opinions and procedures) for a diplomatic mission during its establishment in Chad",
+      "Legal counsel to companies in the construction and services sectors",
+      "Consultant to a training and research centre on the diya (blood-money) question in Chad, as well as on issues of workplace sexual harassment",
     ],
     publicationsTitle: "Publications",
     publications: [
@@ -96,7 +95,7 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const t = copy[locale];
-  return { title: t.title, description: t.metaDescription };
+  return pageMetadata(locale, "notre-fondateur", { title: t.title, description: t.metaDescription });
 }
 
 export default async function FounderPage({ params }: { params: Promise<{ locale: string }> }) {

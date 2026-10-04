@@ -1,58 +1,100 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { firm } from "@/lib/data/firm";
+import { analyticsId, firm } from "@/lib/data/firm";
+import { CookieSettingsButton } from "@/components/layout/CookieConsent";
 
 export function Footer({ locale, dict }: { locale: Locale; dict: Dictionary }) {
   const base = `/${locale}`;
   const year = new Date().getFullYear();
 
+  const firmLinks = [
+    { href: `${base}/a-propos`, label: dict.nav.about },
+    { href: `${base}/le-cabinet`, label: dict.nav.firm },
+    { href: `${base}/notre-fondateur`, label: dict.nav.founder },
+    { href: `${base}/notre-equipe`, label: dict.nav.team },
+    { href: `${base}/implantation`, label: dict.nav.locations },
+    { href: `${base}/galerie`, label: dict.nav.gallery },
+    { href: `${base}/actualites`, label: dict.nav.news },
+  ];
+
+  const serviceLinks = [
+    { href: `${base}/domaines-expertise`, label: dict.nav.expertise },
+    { href: `${base}/secteurs-intervention`, label: dict.nav.sectors },
+    { href: `${base}/publications`, label: dict.nav.publications },
+    { href: `${base}/ressources`, label: dict.nav.resources },
+    { href: `${base}/faq`, label: dict.nav.faq },
+    { href: `${base}/rendez-vous`, label: dict.nav.appointment },
+    { href: `${base}/soumettre-une-demande`, label: dict.nav.submitRequest },
+    { href: `${base}/suivre-mon-dossier`, label: dict.nav.trackFile },
+  ];
+
+  const legalLinks = [
+    { href: `${base}/mentions-legales`, label: dict.footer.legalNotice },
+    { href: `${base}/politique-de-confidentialite`, label: dict.footer.privacy },
+    { href: `${base}/politique-cookies`, label: dict.footer.cookies },
+    { href: `${base}/conditions-espace-client`, label: dict.footer.clientTerms },
+  ];
+
   return (
     <footer className="bg-navy text-white/85 mt-24">
-      <div className="mx-auto w-full max-w-6xl px-6 py-14 grid gap-10 md:grid-cols-4">
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
             <Image src="/images/logo-nfp-white.png" alt="" width={36} height={36} aria-hidden />
             <div className="font-serif text-xl text-white">FN &amp; PARTNERS</div>
           </div>
           <p className="mt-3 text-sm text-white/60 leading-relaxed">{dict.footer.description}</p>
+          <address className="mt-5 not-italic space-y-2 text-sm text-white/70">
+            <div>{firm.address.line1[locale]}</div>
+            <div>{firm.address.city}, {firm.address.country[locale]}</div>
+            <div>
+              <a href={`tel:${firm.phones[0].replace(/\s/g, "")}`} className="hover:text-gold-light">{firm.phones[0]}</a>
+            </div>
+            <div>
+              <a href={`mailto:${firm.contactEmail}`} className="hover:text-gold-light">{firm.contactEmail}</a>
+            </div>
+          </address>
         </div>
 
-        <div>
-          <div className="kicker text-gold-light mb-4">{dict.footer.navTitle}</div>
+        <nav aria-label={dict.footer.firmTitle}>
+          <div className="kicker text-gold-light mb-4">{dict.footer.firmTitle}</div>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link href={`${base}/a-propos`} className="hover:text-gold-light">{dict.nav.about}</Link></li>
-            <li><Link href={`${base}/le-cabinet`} className="hover:text-gold-light">{dict.nav.firm}</Link></li>
-            <li><Link href={`${base}/domaines-expertise`} className="hover:text-gold-light">{dict.nav.expertise}</Link></li>
-            <li><Link href={`${base}/notre-equipe`} className="hover:text-gold-light">{dict.nav.team}</Link></li>
-            <li><Link href={`${base}/galerie`} className="hover:text-gold-light">{dict.nav.gallery}</Link></li>
-            <li><Link href={`${base}/actualites`} className="hover:text-gold-light">{dict.nav.news}</Link></li>
-            <li><Link href={`${base}/publications`} className="hover:text-gold-light">{dict.nav.publications}</Link></li>
-            <li><Link href={`${base}/faq`} className="hover:text-gold-light">{dict.nav.faq}</Link></li>
-            <li><Link href={`${base}/rendez-vous`} className="hover:text-gold-light">{dict.nav.appointment}</Link></li>
+            {firmLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} prefetch={false} className="hover:text-gold-light">{link.label}</Link>
+              </li>
+            ))}
           </ul>
-        </div>
+        </nav>
 
-        <div>
-          <div className="kicker text-gold-light mb-4">{dict.footer.contactTitle}</div>
+        <nav aria-label={dict.footer.servicesTitle}>
+          <div className="kicker text-gold-light mb-4">{dict.footer.servicesTitle}</div>
           <ul className="space-y-2 text-sm text-white/70">
-            <li>{firm.address.line1[locale]}</li>
-            <li>{firm.address.city}, {firm.address.country[locale]}</li>
-            <li><a href={`tel:${firm.phones[0].replace(/\s/g, "")}`} className="hover:text-gold-light">{firm.phones[0]}</a></li>
-            <li><a href={`mailto:${firm.email}`} className="hover:text-gold-light">{firm.email}</a></li>
+            {serviceLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} prefetch={false} className="hover:text-gold-light">{link.label}</Link>
+              </li>
+            ))}
           </ul>
-        </div>
+        </nav>
 
-        <div>
+        <nav aria-label={dict.footer.legal}>
           <div className="kicker text-gold-light mb-4">{dict.footer.legal}</div>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link href={`${base}/mentions-legales`} className="hover:text-gold-light">{dict.footer.legalNotice}</Link></li>
-            <li><Link href={`${base}/politique-de-confidentialite`} className="hover:text-gold-light">{dict.footer.privacy}</Link></li>
-            <li><Link href={`${base}/politique-cookies`} className="hover:text-gold-light">{dict.footer.cookies}</Link></li>
-            <li><Link href={`${base}/conditions-espace-client`} className="hover:text-gold-light">{dict.footer.clientTerms}</Link></li>
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} prefetch={false} className="hover:text-gold-light">{link.label}</Link>
+              </li>
+            ))}
+            {analyticsId && (
+              <li>
+                <CookieSettingsButton label={dict.cookies.manage} />
+              </li>
+            )}
           </ul>
-        </div>
+        </nav>
       </div>
 
       <div className="border-t border-white/10">

@@ -27,11 +27,11 @@ export const generalFaq: FaqItem[] = [
   {
     fr: {
       q: "Comment soumettre une demande ou un dossier au cabinet ?",
-      a: "Un formulaire de soumission de demande en ligne sera disponible prochainement. En attendant, vous pouvez prendre rendez-vous ou contacter directement le cabinet.",
+      a: "Le formulaire « Soumettre une demande » permet d’exposer votre situation en quelques étapes et de joindre vos pièces de façon confidentielle. Le cabinet examine chaque demande, vérifie l’absence de conflit d’intérêts et revient vers vous. Vous pouvez aussi prendre rendez-vous ou contacter directement le cabinet.",
     },
     en: {
       q: "How can I submit a request or a file to the firm?",
-      a: "An online request submission form will be available soon. In the meantime, you can book an appointment or contact the firm directly.",
+      a: "The “Submit a Request” form lets you set out your situation in a few steps and attach documents confidentially. The firm reviews each request, checks for conflicts of interest and gets back to you. You can also book an appointment or contact the firm directly.",
     },
   },
   {
@@ -57,11 +57,11 @@ export const generalFaq: FaqItem[] = [
   {
     fr: {
       q: "Le site propose-t-il un espace client sécurisé ?",
-      a: "Un espace client sécurisé pour le suivi des dossiers est en cours de déploiement. Il permettra à terme de suivre l’avancement d’un dossier, d’échanger des documents et de communiquer avec le cabinet en toute confidentialité.",
+      a: "Oui. Lorsque le cabinet prend en charge votre dossier, il vous ouvre un accès personnel à l’espace client : vous recevez par e-mail un lien d’activation, puis vous vous connectez avec votre mot de passe et un code de vérification. Vous pouvez y suivre l’avancement de votre dossier et consulter les documents associés.",
     },
     en: {
       q: "Does the site offer a secure client area?",
-      a: "A secure client area for file tracking is being rolled out. It will eventually allow clients to follow the progress of their file, exchange documents and communicate confidentially with the firm.",
+      a: "Yes. When the firm takes on your file, it opens personal access to the client area for you: you receive an activation link by email, then sign in with your password and a verification code. There you can follow the progress of your file and view the related documents.",
     },
   },
 ];

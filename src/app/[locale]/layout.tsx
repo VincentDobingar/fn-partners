@@ -8,12 +8,14 @@ import { siteConfig } from "@/lib/data/firm";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CookieConsent } from "@/components/layout/CookieConsent";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationSchema } from "@/lib/seo/jsonld";
+import { organizationSchema, websiteSchema } from "@/lib/seo/jsonld";
 
 const fraunces = Fraunces({ variable: "--font-fraunces", subsets: ["latin"], weight: ["500", "600", "700"] });
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"] });
+// Police d’accent (petites mentions) : non préchargée pour alléger le premier affichage.
+const plexMono = IBM_Plex_Mono({ variable: "--font-plex-mono", subsets: ["latin"], weight: ["400", "500"], preload: false });
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -39,10 +41,6 @@ export async function generateMetadata({
     metadataBase: new URL(siteConfig.url),
     title: { default: title, template: `%s — FN & PARTNERS` },
     description,
-    alternates: {
-      canonical: `/${loc}`,
-      languages: { fr: "/fr", en: "/en" },
-    },
     openGraph: {
       title,
       description,
@@ -51,6 +49,8 @@ export async function generateMetadata({
       locale: loc === "fr" ? "fr_FR" : "en_US",
       type: "website",
     },
+    twitter: { card: "summary_large_image", title, description },
+    formatDetection: { telephone: true, email: true, address: true },
   };
 }
 
@@ -68,10 +68,18 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${fraunces.variable} ${inter.variable} ${plexMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <a
+          href="#contenu"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-sm focus:bg-gold focus:px-4 focus:py-2 focus:text-sm focus:text-navy"
+        >
+          {dict.common.skipToContent}
+        </a>
         <JsonLd data={organizationSchema(locale)} />
+        <JsonLd data={websiteSchema(locale)} />
         <Header locale={locale} dict={dict} />
-        <main className="flex-1">{children}</main>
+        <main id="contenu" tabIndex={-1} className="flex-1 focus:outline-none">{children}</main>
         <Footer locale={locale} dict={dict} />
+        <WhatsAppButton locale={locale} />
         <CookieConsent locale={locale} dict={dict} />
       </body>
     </html>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { pageMetadata } from "@/lib/seo/metadata";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
@@ -44,6 +45,10 @@ const copy = {
       { href: "notre-equipe", label: "Notre équipe", text: "Les avocats et juristes qui composent le cabinet." },
       { href: "le-cabinet", label: "Le Cabinet", text: "Positionnement, engagements et références." },
       { href: "domaines-expertise", label: "Domaines d’expertise", text: "Nos 22 domaines de compétence." },
+      { href: "implantation", label: "Implantation panafricaine", text: "Notre siège à N’Djamena et notre portée régionale." },
+      { href: "secteurs-intervention", label: "Secteurs d’intervention", text: "Les acteurs que nous accompagnons." },
+      { href: "ressources", label: "Ressources & guides", text: "Nos guides pratiques, étape par étape." },
+      { href: "publications", label: "Publications", text: "Les analyses juridiques du cabinet." },
     ],
   },
   en: {
@@ -82,6 +87,10 @@ const copy = {
       { href: "notre-equipe", label: "Our Team", text: "The attorneys and legal professionals of the firm." },
       { href: "le-cabinet", label: "The Firm", text: "Positioning, commitments and references." },
       { href: "domaines-expertise", label: "Areas of Expertise", text: "Our 22 areas of practice." },
+      { href: "implantation", label: "Pan-African Presence", text: "Our office in N’Djamena and our regional reach." },
+      { href: "secteurs-intervention", label: "Sectors We Serve", text: "The clients we support." },
+      { href: "ressources", label: "Resources & Guides", text: "Our practical, step-by-step guides." },
+      { href: "publications", label: "Publications", text: "The firm’s legal analysis." },
     ],
   },
 } as const;
@@ -94,7 +103,7 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const t = copy[locale];
-  return { title: t.title, description: t.metaDescription };
+  return pageMetadata(locale, "a-propos", { title: t.title, description: t.metaDescription });
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

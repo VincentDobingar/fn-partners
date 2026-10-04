@@ -52,6 +52,37 @@ export const siteConfig = {
   name: "FN & PARTNERS",
   defaultLocale: "fr",
   locales: ["fr", "en"] as const,
+  /** Date de dernière mise à jour générale des contenus (sitemap) — à actualiser à chaque révision. */
+  lastUpdated: "2026-10-03",
 };
+
+/**
+ * Créneaux proposés dans le formulaire de prise de rendez-vous (heure de N’Djamena).
+ * `days` : jours ouverts (1 = lundi … 5 = vendredi) ; créneaux d’une heure de `startHour`
+ * à `endHour` (le dernier créneau commence une heure avant `endHour`).
+ * En cas de changement, adapter aussi le libellé `hours` de `AppointmentForm.tsx`.
+ */
+export const appointmentConfig = {
+  days: [1, 2, 3, 4, 5] as readonly number[],
+  startHour: 8,
+  endHour: 17,
+  slotMinutes: 60,
+  maxFiles: 3,
+  maxFileSizeMb: 5,
+} as const;
+
+export function appointmentSlots(): string[] {
+  const slots: string[] = [];
+  const { startHour, endHour, slotMinutes } = appointmentConfig;
+  for (let minutes = startHour * 60; minutes + slotMinutes <= endHour * 60; minutes += slotMinutes) {
+    const h = String(Math.floor(minutes / 60)).padStart(2, "0");
+    const m = String(minutes % 60).padStart(2, "0");
+    slots.push(`${h}:${m}`);
+  }
+  return slots;
+}
+
+/** Identifiant de mesure Google Analytics 4 (G-XXXXXXXXXX). Vide = aucune mesure d’audience. */
+export const analyticsId = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 export type Locale = (typeof siteConfig.locales)[number];

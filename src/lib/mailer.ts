@@ -1,5 +1,7 @@
 import nodemailer from "nodemailer";
 
+export type MailAttachment = { filename: string; content: Buffer; contentType?: string };
+
 function getTransport() {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD } = process.env;
   if (!SMTP_HOST || !SMTP_USER || !SMTP_PASSWORD) return null;
@@ -12,7 +14,13 @@ function getTransport() {
   });
 }
 
-export async function sendMail(options: { to: string; subject: string; text: string; replyTo?: string }) {
+export async function sendMail(options: {
+  to: string;
+  subject: string;
+  text: string;
+  replyTo?: string;
+  attachments?: MailAttachment[];
+}) {
   const transport = getTransport();
   const from = process.env.MAIL_FROM ?? options.to;
 
@@ -21,6 +29,7 @@ export async function sendMail(options: { to: string; subject: string; text: str
       to: options.to,
       subject: options.subject,
       text: options.text,
+      attachments: options.attachments?.map((file) => `${file.filename} (${file.content.length} octets)`),
     });
     return { delivered: false as const };
   }
@@ -31,6 +40,7 @@ export async function sendMail(options: { to: string; subject: string; text: str
     replyTo: options.replyTo,
     subject: options.subject,
     text: options.text,
+    attachments: options.attachments,
   });
   return { delivered: true as const };
 }

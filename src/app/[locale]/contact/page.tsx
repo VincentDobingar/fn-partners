@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
@@ -110,7 +111,7 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const t = copy[locale];
-  return { title: t.title, description: t.metaDescription };
+  return pageMetadata(locale, "contact", { title: t.title, description: t.metaDescription });
 }
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {

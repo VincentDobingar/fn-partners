@@ -48,12 +48,20 @@ export const dictionaries = {
       clientTerms: "Conditions d’utilisation de l’espace client",
       contactTitle: "Contact",
       navTitle: "Navigation",
+      firmTitle: "Le cabinet",
+      servicesTitle: "Services et ressources",
       rights: "Tous droits réservés.",
       credit: "Site créé par",
     },
     cookies: {
       message:
         "Ce site utilise uniquement des éléments techniques nécessaires à son fonctionnement. Aucun cookie de mesure d’audience ou publicitaire n’est déposé à ce jour.",
+      consentMessage:
+        "Avec votre accord, ce site utilise des cookies de mesure d’audience (Google Analytics) pour comprendre comment il est consulté et l’améliorer. Aucun cookie publicitaire n’est déposé. Vous pouvez refuser sans conséquence sur votre navigation.",
+      accept: "Accepter",
+      refuse: "Refuser",
+      manage: "Gérer mes cookies",
+      label: "Cookies",
       dismiss: "J’ai compris",
       more: "En savoir plus",
     },
@@ -62,6 +70,9 @@ export const dictionaries = {
       toComplete: "À compléter",
       language: "Langue",
       breadcrumbHome: "Accueil",
+      skipToContent: "Aller au contenu principal",
+      legalDisclaimer:
+        "Ces informations sont générales et ne constituent pas une consultation juridique. Chaque situation appelle une analyse particulière : contactez le cabinet avant toute décision.",
       officialContent: "Ce contenu sera confirmé par le cabinet avant mise en ligne définitive.",
     },
     appointmentDisclaimer:
@@ -116,12 +127,20 @@ export const dictionaries = {
       clientTerms: "Client Area Terms of Use",
       contactTitle: "Contact",
       navTitle: "Navigation",
+      firmTitle: "The firm",
+      servicesTitle: "Services and resources",
       rights: "All rights reserved.",
       credit: "Site created by",
     },
     cookies: {
       message:
         "This site only uses technical elements required for it to function. No audience-measurement or advertising cookies are set at this time.",
+      consentMessage:
+        "With your consent, this site uses audience-measurement cookies (Google Analytics) to understand how it is used and improve it. No advertising cookies are set. You can refuse without any effect on your browsing.",
+      accept: "Accept",
+      refuse: "Refuse",
+      manage: "Manage my cookies",
+      label: "Cookies",
       dismiss: "Got it",
       more: "Learn more",
     },
@@ -130,6 +149,9 @@ export const dictionaries = {
       toComplete: "To be completed",
       language: "Language",
       breadcrumbHome: "Home",
+      skipToContent: "Skip to main content",
+      legalDisclaimer:
+        "This information is general in nature and does not constitute legal advice. Every situation calls for specific analysis: please contact the firm before making any decision.",
       officialContent: "This content will be confirmed by the firm before final publication.",
     },
     appointmentDisclaimer:

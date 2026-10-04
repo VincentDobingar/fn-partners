@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { notFound } from "next/navigation";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/dictionaries";
 import { newsItems, getNewsBySlug } from "@/lib/data/news";
-import { siteConfig } from "@/lib/data/firm";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbSchema } from "@/lib/seo/jsonld";
+import { articleSchema, breadcrumbSchema } from "@/lib/seo/jsonld";
+import { absoluteUrl, pageMetadata } from "@/lib/seo/metadata";
 
 const copy = {
   fr: {
@@ -39,7 +39,13 @@ export async function generateMetadata({
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const item = getNewsBySlug(slug);
   if (!item) return {};
-  return { title: item[locale].title, description: item[locale].excerpt };
+  return pageMetadata(locale, `actualites/${slug}`, {
+    title: item[locale].title,
+    description: item[locale].excerpt,
+    type: "article",
+    publishedTime: item.date,
+    image: { url: item.image, alt: item.imageAlt[locale] },
+  });
 }
 
 export default async function NewsDetailPage({
@@ -67,10 +73,20 @@ export default async function NewsDetailPage({
     <Container className="py-16 max-w-3xl">
       <JsonLd
         data={breadcrumbSchema([
-          { name: dict.common.breadcrumbHome, url: `${siteConfig.url}${base}` },
-          { name: t.breadcrumbNews, url: `${siteConfig.url}${base}/actualites` },
-          { name: item[locale].title, url: `${siteConfig.url}${base}/actualites/${slug}` },
+          { name: dict.common.breadcrumbHome, url: absoluteUrl(locale) },
+          { name: t.breadcrumbNews, url: absoluteUrl(locale, "actualites") },
+          { name: item[locale].title, url: absoluteUrl(locale, `actualites/${slug}`) },
         ])}
+      />
+      <JsonLd
+        data={articleSchema({
+          locale,
+          title: item[locale].title,
+          description: item[locale].excerpt,
+          datePublished: item.date,
+          url: absoluteUrl(locale, `actualites/${slug}`),
+          image: item.image,
+        })}
       />
 
       <nav className="text-xs font-mono uppercase tracking-wider text-muted mb-6">
@@ -85,7 +101,7 @@ export default async function NewsDetailPage({
         {item.video ? (
           <video
             controls
-            preload="metadata"
+            preload="none"
             poster={item.video.poster ?? item.image}
             className="w-full h-auto"
           >

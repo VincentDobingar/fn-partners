@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import type { ExpertiseDomain } from "@/lib/data/expertise";
 
@@ -7,6 +7,7 @@ export function ExpertiseCard({ domain, locale }: { domain: ExpertiseDomain; loc
   return (
     <Link
       href={`/${locale}/domaines-expertise/${domain.slug}`}
+      prefetch={false}
       className="group block rounded-sm border border-line bg-raised p-6 hover:border-gold transition-colors"
     >
       <h3 className="font-serif text-lg text-navy group-hover:text-gold-deep transition-colors">

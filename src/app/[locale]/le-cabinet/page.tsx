@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo/metadata";
 import type { Locale } from "@/lib/data/firm";
 import { isLocale } from "@/lib/i18n/config";
 import { firm } from "@/lib/data/firm";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
+import Link from "@/components/ui/Link";
 
 const copy = {
   fr: {
@@ -50,21 +52,18 @@ const copy = {
       "Droit pénal",
       "Assistance fiscale",
     ],
-    referencesTitle: "Ils nous ont fait confiance",
-    referencesLead: "Le cabinet a été sollicité par des institutions, entreprises et organisations de premier plan, au Tchad comme à l’international.",
+    referencesTitle: "Ils nous font confiance",
+    referencesLead:
+      "Le cabinet est sollicité par des institutions, des entreprises et des organisations de premier plan, au Tchad comme à l’international. Par respect du secret professionnel, leurs noms ne sont pas publiés ; les références du cabinet sont communiquées sur demande, avec l’accord des clients concernés.",
     references: [
-      "Union Européenne au Tchad",
-      "Ambassade d’Allemagne au Tchad",
-      "Ambassade de Hongrie au Tchad",
-      "Haut-Commissariat Britannique au Tchad",
-      "CEFOD",
-      "Société d’Innovation des Bâtiments (SINOBAT) S.A",
-      "Société Nouvelle de prestation de services (NSP) S.A",
-      "Société L’AMANDINE (SARL)",
-      "Banque Agricole et Commerciale (BAC)",
-      "United Bank for Africa (UBA)",
-      "Banque Commerciale du Chari (BCC)",
+      "Institutions européennes et internationales",
+      "Représentations diplomatiques accréditées au Tchad",
+      "Établissements bancaires",
+      "Sociétés du bâtiment, des services et du commerce",
+      "Centres de formation et organisations de la société civile",
+      "ONG nationales et internationales",
     ],
+    implantationCta: "Notre implantation et notre portée panafricaine →",
     downloadCta: "Télécharger la présentation du cabinet (PDF)",
   },
   en: {
@@ -110,21 +109,18 @@ const copy = {
       "Criminal Law",
       "Tax Assistance",
     ],
-    referencesTitle: "Trusted By",
-    referencesLead: "The firm has been called upon by leading institutions, companies and organisations, in Chad and internationally.",
+    referencesTitle: "Who Trusts Us",
+    referencesLead:
+      "The firm is called upon by leading institutions, companies and organisations, in Chad and internationally. Out of respect for professional secrecy, their names are not published; the firm’s references are available on request, with the consent of the clients concerned.",
     references: [
-      "European Union in Chad",
-      "Embassy of Germany in Chad",
-      "Embassy of Hungary in Chad",
-      "British High Commission in Chad",
-      "CEFOD",
-      "Société d’Innovation des Bâtiments (SINOBAT) S.A",
-      "Société Nouvelle de prestation de services (NSP) S.A",
-      "Société L’AMANDINE (SARL)",
-      "Banque Agricole et Commerciale (BAC)",
-      "United Bank for Africa (UBA)",
-      "Banque Commerciale du Chari (BCC)",
+      "European and international institutions",
+      "Diplomatic missions accredited to Chad",
+      "Banking institutions",
+      "Construction, services and trading companies",
+      "Training centres and civil society organisations",
+      "National and international NGOs",
     ],
+    implantationCta: "Our location and pan-African reach →",
     downloadCta: "Download the firm presentation (PDF)",
   },
 } as const;
@@ -137,7 +133,7 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   const locale: Locale = isLocale(raw) ? raw : "fr";
   const t = copy[locale];
-  return { title: t.title, description: t.metaDescription };
+  return pageMetadata(locale, "le-cabinet", { title: t.title, description: t.metaDescription });
 }
 
 export default async function FirmPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -210,6 +206,12 @@ export default async function FirmPage({ params }: { params: Promise<{ locale: s
             </li>
           ))}
         </ul>
+        <Link
+          href={`/${locale}/implantation`}
+          className="mt-10 inline-flex items-center gap-2 text-sm font-mono uppercase tracking-wider text-gold-deep hover:text-gold-light w-fit"
+        >
+          {t.implantationCta}
+        </Link>
       </div>
       </Container>
     </>

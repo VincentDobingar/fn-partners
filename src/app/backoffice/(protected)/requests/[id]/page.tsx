@@ -3,6 +3,7 @@ import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { StatusForm } from "./StatusForm";
 import { InviteClientForm } from "./InviteClientForm";
+import { urgencyLabels, type UrgencyLevel } from "@/lib/data/requestOptions";
 
 export default async function RequestDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -54,7 +55,7 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
         </div>
         <div>
           <dt className="text-muted">Urgence</dt>
-          <dd className="text-ink-soft">{request.urgency}</dd>
+          <dd className="text-ink-soft">{urgencyLabels[request.urgency as UrgencyLevel]?.fr ?? request.urgency}</dd>
         </div>
         {request.opposing_party_name && (
           <div>

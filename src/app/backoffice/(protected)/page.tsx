@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
-import { REQUEST_STATUS_LABELS } from "@/lib/data/requestOptions";
+import { REQUEST_STATUS_LABELS, urgencyLabels, type UrgencyLevel } from "@/lib/data/requestOptions";
 
 export const metadata: Metadata = { title: "Tableau de bord" };
 
@@ -41,7 +41,7 @@ export default async function BackofficeDashboardPage() {
                   </td>
                   <td className="px-4 py-3 text-ink-soft">{r.full_name}</td>
                   <td className="px-4 py-3 text-ink-soft">{domain ? domain.fr.title : r.legal_domain_slug}</td>
-                  <td className="px-4 py-3 text-ink-soft">{r.urgency}</td>
+                  <td className="px-4 py-3 text-ink-soft">{urgencyLabels[r.urgency as UrgencyLevel]?.fr ?? r.urgency}</td>
                   <td className="px-4 py-3 text-ink-soft">{REQUEST_STATUS_LABELS[r.status as keyof typeof REQUEST_STATUS_LABELS] ?? r.status}</td>
                   <td className="px-4 py-3 text-muted">{new Date(r.created_at).toLocaleString("fr-FR")}</td>
                 </tr>

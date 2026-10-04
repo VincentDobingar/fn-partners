@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import { useState } from "react";
 import type { Locale } from "@/lib/data/firm";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
@@ -23,6 +23,15 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
     { href: `${base}/contact`, label: dict.nav.contact },
   ];
 
+  // Liens complémentaires proposés dans le menu mobile (la barre de bureau reste compacte).
+  const moreLinks = [
+    { href: `${base}/actualites`, label: dict.nav.news },
+    { href: `${base}/ressources`, label: dict.nav.resources },
+    { href: `${base}/implantation`, label: dict.nav.locations },
+    { href: `${base}/soumettre-une-demande`, label: dict.nav.submitRequest },
+    { href: `${base}/suivre-mon-dossier`, label: dict.nav.trackFile },
+  ];
+
   return (
     <header className="sticky top-0 z-50 bg-raised/95 backdrop-blur border-b border-line">
       <div className="hidden md:flex justify-end bg-navy text-white/85 text-xs font-mono">
@@ -40,18 +49,20 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       </div>
 
       <div className="w-full px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
-        <Link href={base} className="flex items-center gap-3 min-w-0 xl:shrink-0">
-          <Image src="/images/logo-nfp.png" alt="FN & PARTNERS" width={52} height={52} className="shrink-0" />
-          <div className="leading-tight min-w-0 xl:whitespace-nowrap">
+        <Link href={base} className="flex items-center gap-3 min-w-0 min-[1400px]:shrink-0">
+          <Image src="/images/logo-nfp.png" alt="FN & PARTNERS" width={52} height={52} className="shrink-0" priority />
+          <div className="leading-tight min-w-0 min-[1400px]:whitespace-nowrap">
             <div className="font-serif text-lg text-navy truncate">FN &amp; PARTNERS</div>
-            <div className="hidden sm:block text-[10px] uppercase tracking-widest text-muted font-mono truncate">
+            <div className="hidden sm:block min-[1400px]:hidden min-[1640px]:block text-[10px] uppercase tracking-widest text-muted font-mono truncate">
               {firm.tagline[locale]}
             </div>
           </div>
         </Link>
 
-        <div className="hidden xl:flex items-center gap-6 min-w-0">
-          <nav className="flex items-center gap-5 text-sm text-ink-soft">
+        {/* Menu complet à partir de 1400 px (version compacte, sans la devise sous le logo),
+            puis présentation large à partir de 1640 px. En dessous : menu « hamburger ». */}
+        <div className="hidden min-[1400px]:flex items-center gap-5 min-[1640px]:gap-6 min-w-0">
+          <nav className="flex items-center gap-4 text-[13px] min-[1640px]:gap-5 min-[1640px]:text-sm text-ink-soft">
             {links.map((link) => (
               <Link key={link.href} href={link.href} className="hover:text-gold-deep transition-colors whitespace-nowrap">
                 {link.label}
@@ -72,9 +83,10 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
 
         <button
           type="button"
-          className="xl:hidden p-2 text-navy shrink-0"
+          className="min-[1400px]:hidden p-2 text-navy shrink-0"
           aria-label="Menu"
           aria-expanded={open}
+          aria-controls="menu-mobile"
           onClick={() => setOpen((v) => !v)}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -88,9 +100,9 @@ export function Header({ locale, dict }: { locale: Locale; dict: Dictionary }) {
       </div>
 
       {open && (
-        <div className="xl:hidden border-t border-line bg-raised px-6 py-5">
+        <div id="menu-mobile" className="min-[1400px]:hidden border-t border-line bg-raised px-6 py-5 max-h-[calc(100vh-5rem)] overflow-y-auto">
           <nav className="flex flex-col gap-4 text-base text-ink-soft">
-            {links.map((link) => (
+            {[...links, ...moreLinks].map((link) => (
               <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="hover:text-gold-deep">
                 {link.label}
               </Link>

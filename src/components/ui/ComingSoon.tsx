@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/Link";
 import type { Locale } from "@/lib/data/firm";
 import { Container } from "./Container";
 

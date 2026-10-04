@@ -10,6 +10,8 @@ function detectLocale(request: NextRequest) {
   return defaultLocale;
 }
 
+// Les URL anglaises traduites (/en/areas-of-expertise/…) sont gérées par les réécritures et
+// redirections déclarées dans next.config.ts à partir de src/lib/i18n/routes.ts.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -26,6 +28,6 @@ export function proxy(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next|api|backoffice|client|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:png|jpg|jpeg|svg|webp|ico|txt|xml|pdf|mp4|webm|mov|m4v)$).*)",
+    "/((?!_next|api|backoffice|client|favicon.ico|robots.txt|sitemap.xml|.*\\.(?:png|jpg|jpeg|svg|webp|avif|ico|txt|xml|pdf|mp4|webm|mov|m4v)$).*)",
   ],
 };
