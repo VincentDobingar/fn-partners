@@ -69,6 +69,9 @@ export default async function NewsDetailPage({
       })
     : null;
 
+  // Affiche en hauteur : affichée entière et centrée, au lieu d’être recadrée au format 4/3.
+  const isPortrait = !!item.imageSize && item.imageSize.height > item.imageSize.width;
+
   return (
     <Container className="py-16 max-w-3xl">
       <JsonLd
@@ -108,12 +111,12 @@ export default async function NewsDetailPage({
             <source src={item.video.url} type="video/mp4" />
           </video>
         ) : (
-          <div className="relative">
+          <div className={isPortrait ? "relative mx-auto max-w-md" : "relative"}>
             <Image
               src={item.image}
               alt={item.imageAlt[locale]}
-              width={1000}
-              height={750}
+              width={item.imageSize?.width ?? 1000}
+              height={item.imageSize?.height ?? 750}
               className="w-full h-auto object-cover"
               priority
             />

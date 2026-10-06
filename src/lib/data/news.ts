@@ -2,6 +2,11 @@ export interface NewsItem {
   slug: string;
   image: string;
   imageAlt: { fr: string; en: string };
+  /**
+   * Dimensions réelles de l’image (pixels). À renseigner pour une affiche en hauteur dont le
+   * texte doit rester lisible en entier : sans cela, la fiche recadre l’image au format 4/3.
+   */
+  imageSize?: { width: number; height: number };
   source: string;
   /** ISO date (YYYY-MM-DD), renseignée uniquement quand elle est confirmée. */
   date?: string;
@@ -14,6 +19,35 @@ export interface NewsItem {
 }
 
 export const newsItems: NewsItem[] = [
+  {
+    slug: "formation-contrats-miniers-petroliers-gaziers-fa-uja",
+    image: "/images/gallery/actu-fa-uja-contrats-miniers.jpg",
+    imageSize: { width: 717, height: 1076 },
+    imageAlt: {
+      fr: "Affiche de la formation FA-UJA et IQAI sur la rédaction des contrats miniers, pétroliers et gaziers en Afrique, les 9 et 10 octobre 2026",
+      en: "Poster for the FA-UJA and IQAI training on drafting mining, oil and gas contracts in Africa, 9 and 10 October 2026",
+    },
+    source: "FA-UJA",
+    date: "2026-10-06",
+    fr: {
+      title: "Formation FA-UJA et IQAI : la rédaction des contrats miniers, pétroliers et gaziers en Afrique",
+      excerpt: "La FA-UJA, que préside Me Frédéric NANADJINGUE, organise avec l’Institut Québécois des Affaires Internationales une formation sur la rédaction des contrats miniers, pétroliers et gaziers en Afrique, les 9 et 10 octobre 2026.",
+      content: [
+        "La Fédération Africaine des Associations et Unions de Jeunes Avocats (FA-UJA), présidée par Me Frédéric NANADJINGUE, fondateur de FN & PARTNERS, organise avec l’Institut Québécois des Affaires Internationales (IQAI) une formation sur le thème : « La rédaction des contrats miniers, pétroliers et gaziers en Afrique ».",
+        "Les séances se tiendront les 9 et 10 octobre 2026, de 15 h à 17 h (heure d’Afrique centrale). L’enseignement sera assuré par le Dr Robinson TCHAPMEGNI, de l’IQAI.",
+        "Ce thème rejoint l’un des domaines d’intervention du cabinet : le droit minier, pétrolier et énergétique. Pour les modalités de participation, se rapprocher de la FA-UJA.",
+      ],
+    },
+    en: {
+      title: "FA-UJA and IQAI Training: Drafting Mining, Oil and Gas Contracts in Africa",
+      excerpt: "FA-UJA, chaired by Me Frédéric NANADJINGUE, is organising with the Institut Québécois des Affaires Internationales a training course on drafting mining, oil and gas contracts in Africa, on 9 and 10 October 2026.",
+      content: [
+        "The African Federation of Young Lawyers’ Unions and Associations (FA-UJA), chaired by Me Frédéric NANADJINGUE, founder of FN & PARTNERS, is organising with the Institut Québécois des Affaires Internationales (IQAI) a training course on the theme: “Drafting mining, oil and gas contracts in Africa”.",
+        "The sessions will take place on 9 and 10 October 2026, from 3 pm to 5 pm (Central Africa Time). The course will be taught by Dr Robinson TCHAPMEGNI, of IQAI.",
+        "The theme ties in with one of the firm’s practice areas: mining, oil and energy law. For details on how to take part, please contact FA-UJA.",
+      ],
+    },
+  },
   {
     slug: "forum-ia-droit-africain-abidjan",
     image: "/images/gallery/actu-ia-avocat-forum.jpg",

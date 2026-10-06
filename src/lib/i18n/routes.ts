@@ -71,6 +71,7 @@ const itemSegments: Record<string, Record<string, string>> = {
     "guide-investisseur-etranger-tchad": "guide-foreign-investors-in-chad",
   },
   actualites: {
+    "formation-contrats-miniers-petroliers-gaziers-fa-uja": "fa-uja-mining-oil-gas-contracts-training",
     "forum-ia-droit-africain-abidjan": "ai-and-african-law-forum-abidjan",
     "presomption-innocence-personnes-interpellees": "presumption-of-innocence-persons-in-custody",
     "journee-africaine-lutte-corruption-jeunesse": "african-anti-corruption-day-youth",
