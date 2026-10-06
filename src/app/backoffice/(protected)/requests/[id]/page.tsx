@@ -3,7 +3,12 @@ import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { StatusForm } from "./StatusForm";
 import { InviteClientForm } from "./InviteClientForm";
-import { urgencyLabels, type UrgencyLevel } from "@/lib/data/requestOptions";
+import { REQUEST_STATUS_LABELS, urgencyLabels, type RequestStatus, type UrgencyLevel } from "@/lib/data/requestOptions";
+import { formatFirmDateTime } from "@/lib/dates";
+
+function statusLabel(status: string): string {
+  return REQUEST_STATUS_LABELS[status as RequestStatus] ?? status;
+}
 
 export default async function RequestDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -65,7 +70,7 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
         )}
         <div>
           <dt className="text-muted">Reçue le</dt>
-          <dd className="text-ink-soft">{new Date(request.created_at).toLocaleString("fr-FR")}</dd>
+          <dd className="text-ink-soft">{formatFirmDateTime(request.created_at)}</dd>
         </div>
       </dl>
 
@@ -107,7 +112,7 @@ export default async function RequestDetailPage({ params }: { params: Promise<{ 
           <ul className="mt-3 space-y-1.5 text-sm text-muted">
             {history.map((h, i) => (
               <li key={i}>
-                {new Date(h.changed_at).toLocaleString("fr-FR")} — {h.old_status} → {h.new_status} par {h.full_name}
+                {formatFirmDateTime(h.changed_at)} — {statusLabel(h.old_status)} → {statusLabel(h.new_status)} par {h.full_name}
               </li>
             ))}
           </ul>

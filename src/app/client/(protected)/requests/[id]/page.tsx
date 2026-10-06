@@ -3,6 +3,7 @@ import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { REQUEST_STATUS_LABELS } from "@/lib/data/requestOptions";
 import { requireClientSession } from "@/lib/auth/guard";
+import { formatFirmDateTime } from "@/lib/dates";
 
 export default async function ClientRequestDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const client = await requireClientSession();
@@ -37,7 +38,7 @@ export default async function ClientRequestDetailPage({ params }: { params: Prom
         </div>
         <div>
           <dt className="text-muted">Reçue le</dt>
-          <dd className="text-ink-soft">{new Date(request.created_at).toLocaleString("fr-FR")}</dd>
+          <dd className="text-ink-soft">{formatFirmDateTime(request.created_at)}</dd>
         </div>
       </dl>
 
@@ -69,7 +70,7 @@ export default async function ClientRequestDetailPage({ params }: { params: Prom
           <ul className="mt-3 space-y-1.5 text-sm text-muted">
             {history.map((h, i) => (
               <li key={i}>
-                {new Date(h.changed_at).toLocaleString("fr-FR")} — Statut :{" "}
+                {formatFirmDateTime(h.changed_at)} — Statut :{" "}
                 {REQUEST_STATUS_LABELS[h.new_status as keyof typeof REQUEST_STATUS_LABELS] ?? h.new_status}
               </li>
             ))}

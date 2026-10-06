@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { firm } from "@/lib/data/firm";
 import { expertiseDomains } from "@/lib/data/expertise";
-import { URGENCY_LEVELS } from "@/lib/data/requestOptions";
+import { URGENCY_LEVELS, urgencyLabels } from "@/lib/data/requestOptions";
 import { sendMail } from "@/lib/mailer";
 import { looksLikeSpam } from "@/lib/security/antiSpam";
 import { getClientIp, isRateLimited } from "@/lib/security/rateLimit";
@@ -145,7 +145,7 @@ export async function POST(request: Request) {
     `E-mail : ${data.email}`,
     `Téléphone : ${data.phone}`,
     `Domaine juridique : ${domain ? domain.fr.title : data.legalDomainSlug}`,
-    `Urgence : ${data.urgency}`,
+    `Urgence : ${urgencyLabels[data.urgency].fr}`,
     data.opposingPartyName ? `Partie adverse : ${data.opposingPartyName}` : null,
     data.opposingPartyDetails ? `Détails partie adverse : ${data.opposingPartyDetails}` : null,
     `Pièces jointes : ${storedDocuments.length}`,

@@ -4,6 +4,7 @@ import { getDb } from "@/lib/db";
 import { expertiseDomains } from "@/lib/data/expertise";
 import { REQUEST_STATUS_LABELS } from "@/lib/data/requestOptions";
 import { requireClientSession } from "@/lib/auth/guard";
+import { formatFirmDateTime } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Mes demandes" };
 
@@ -43,7 +44,7 @@ export default async function ClientDashboardPage() {
                   </td>
                   <td className="px-4 py-3 text-ink-soft">{domain ? domain.fr.title : r.legal_domain_slug}</td>
                   <td className="px-4 py-3 text-ink-soft">{REQUEST_STATUS_LABELS[r.status as keyof typeof REQUEST_STATUS_LABELS] ?? r.status}</td>
-                  <td className="px-4 py-3 text-muted">{new Date(r.created_at).toLocaleString("fr-FR")}</td>
+                  <td className="px-4 py-3 text-muted">{formatFirmDateTime(r.created_at)}</td>
                 </tr>
               );
             })}
